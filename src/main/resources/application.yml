@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sq8OrangeFcamara
+    username: adm
+    password: adm
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
