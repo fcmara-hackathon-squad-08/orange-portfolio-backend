@@ -1,4 +1,5 @@
 package com.squad8.s8orangebackend.Domain.Project;
+import com.squad8.s8orangebackend.Domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -20,6 +21,10 @@ public class Project  implements Serializable {
     private String projectLink;
     @NotEmpty(message = "Informe a decricao do projeto")
     private String projectDescription;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Project() {
     }
