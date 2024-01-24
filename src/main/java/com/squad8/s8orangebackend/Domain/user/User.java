@@ -1,9 +1,12 @@
 package com.squad8.s8orangebackend.Domain.user;
 
+import com.squad8.s8orangebackend.Domain.Project.Project;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +28,9 @@ public class User implements Serializable {
     private String password;
     private String country;
     private String imageUrl;
+
+    @OneToMany(mappedBy = "user")
+    private List<Project> projects;
 
     public User() {
     }
