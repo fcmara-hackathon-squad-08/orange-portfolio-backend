@@ -28,12 +28,13 @@ public class Project  implements Serializable {
 
     public Project() {
     }
-    public Project(Long projectId, String projectTitle, EnumTags projectTags, String projectLink, String projectDescription) {
+    public Project(Long projectId, String projectTitle, EnumTags projectTags, String projectLink, String projectDescription, User user) {
         this.projectId = projectId;
         this.projectTitle = projectTitle;
         this.projectTags = projectTags;
         this.projectLink = projectLink;
         this.projectDescription = projectDescription;
+        this.user = user;
     }
     public Long getProjectId() {
         return projectId;
@@ -64,6 +65,14 @@ public class Project  implements Serializable {
     }
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
