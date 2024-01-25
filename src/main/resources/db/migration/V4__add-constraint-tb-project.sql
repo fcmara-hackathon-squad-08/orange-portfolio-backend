@@ -1,0 +1,1 @@
+ALTER TABLE tb_project ADD CONSTRAINT Fk_User FOREIGN KEY (user_id) REFERENCES tb_user(id)
