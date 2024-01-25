@@ -1,5 +1,5 @@
-package com.squad8.s8orangebackend.Domain.Project;
-import com.squad8.s8orangebackend.Domain.user.User;
+package com.squad8.s8orangebackend.domain.project;
+import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
