@@ -11,3 +11,10 @@ spring:
       hibernate:
         '[show_sql]': true
         '[format_sql]': true
+springdoc:
+  api-docs:
+    path: /api-docs
+
+  swagger-ui:
+    path: /swagger-ui-custom.html
+    operationsSorter: method

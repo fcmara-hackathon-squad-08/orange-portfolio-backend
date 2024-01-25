@@ -22,11 +22,12 @@ public class UserRegistrationController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
     @Transactional
-    public ResponseEntity<UserRegistrationDto> registerUser(@Validated @RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
+    @PostMapping("/register")
+    public ResponseEntity<User> insertUser(@RequestBody @Validated UserRegistrationDto userRegistrationDTO, UriComponentsBuilder uriComponentsBuilder) {
+        User user = userService.fromDto(userRegistrationDTO);
         user = userService.insertUser(user);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(new UserRegistrationDto(user));
+        return ResponseEntity.created(uri).body(user);
     }
 }
