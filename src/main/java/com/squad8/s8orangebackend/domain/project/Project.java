@@ -13,14 +13,14 @@ public class Project  implements Serializable {
     private static final Long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long projectId;
+    private Long id;
     @NotEmpty(message = "Informe um nome para o projeto")
-    private String projectTitle;
+    private String title;
     @NotEmpty(message = "Informe ao menos uma tag para o projeto")
-    private EnumTags projectTags;
-    private String projectLink;
+    private EnumTag tag;
+    private String link;
     @NotEmpty(message = "Informe a decricao do projeto")
-    private String projectDescription;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -28,43 +28,54 @@ public class Project  implements Serializable {
 
     public Project() {
     }
-    public Project(Long projectId, String projectTitle, EnumTags projectTags, String projectLink, String projectDescription, User user) {
-        this.projectId = projectId;
-        this.projectTitle = projectTitle;
-        this.projectTags = projectTags;
-        this.projectLink = projectLink;
-        this.projectDescription = projectDescription;
+
+    public Project(Long id, String title, EnumTag tag, String link, String description, User user) {
+        this.id = id;
+        this.title = title;
+        this.tag = tag;
+        this.link = link;
+        this.description = description;
         this.user = user;
     }
-    public Long getProjectId() {
-        return projectId;
+
+    public Long getId() {
+        return id;
     }
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getProjectTitle() {
-        return projectTitle;
+
+    public String getTitle() {
+        return title;
     }
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public EnumTags getProjectTags() {
-        return projectTags;
+
+    public EnumTag getTag() {
+        return tag;
     }
-    public void setProjectTags(EnumTags projectTags) {
-        this.projectTags = projectTags;
+
+    public void setTag(EnumTag tag) {
+        this.tag = tag;
     }
-    public String getProjectLink() {
-        return projectLink;
+
+    public String getLink() {
+        return link;
     }
-    public void setProjectLink(String projectLink) {
-        this.projectLink = projectLink;
+
+    public void setLink(String link) {
+        this.link = link;
     }
-    public String getProjectDescription() {
-        return projectDescription;
+
+    public String getDescription() {
+        return description;
     }
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription;
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {
@@ -80,11 +91,11 @@ public class Project  implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return Objects.equals(projectId, project.projectId);
+        return Objects.equals(id, project.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectId);
+        return Objects.hash(id);
     }
 }
