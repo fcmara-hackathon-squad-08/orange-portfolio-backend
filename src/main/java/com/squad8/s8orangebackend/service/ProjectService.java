@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public class ProjectService {
     @Autowired
-    private ProjectRepository actionProjectRepository;
+    private ProjectRepository projectRepository;
     public List<Project> listProjects() {
-        return actionProjectRepository.findAll();
+        return projectRepository.findAll();
     }
 }
