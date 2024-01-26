@@ -2,7 +2,6 @@ package com.squad8.s8orangebackend.domain.project;
 import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
