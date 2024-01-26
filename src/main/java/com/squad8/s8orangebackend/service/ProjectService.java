@@ -1,5 +1,4 @@
 package com.squad8.s8orangebackend.service;
-
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
