@@ -3,6 +3,7 @@ package com.squad8.s8orangebackend.dtos;
 import com.squad8.s8orangebackend.domain.project.EnumTag;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.domain.user.User;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class ProjectRegistrationDto {
@@ -13,7 +14,7 @@ public class ProjectRegistrationDto {
     private EnumTag tag;
     @NotNull
     private String link;
-    @NotNull
+    @NotEmpty
     private String description;
     @NotNull
     private Long idUser;

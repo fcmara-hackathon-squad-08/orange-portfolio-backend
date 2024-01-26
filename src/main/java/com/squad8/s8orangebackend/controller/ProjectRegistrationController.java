@@ -18,7 +18,7 @@ public class ProjectRegistrationController {
     @Autowired
     private ProjectService projectService;
     @Transactional
-    @PostMapping("/register")
+    @PostMapping("/add")
     public ResponseEntity<Project> insertProject(@RequestBody @Validated ProjectRegistrationDto projectRegistrationDTO, UriComponentsBuilder uriComponentsBuilder){
         Project project = projectService.fromDto(projectRegistrationDTO);
         project = projectService.insertProject(project);

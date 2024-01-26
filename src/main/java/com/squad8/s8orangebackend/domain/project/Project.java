@@ -1,6 +1,7 @@
 package com.squad8.s8orangebackend.domain.project;
 import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
@@ -20,7 +21,7 @@ public class Project  implements Serializable {
     private EnumTag tag;
     @NotNull
     private String link;
-    @NotNull
+    @NotEmpty
     private String description;
 
     @ManyToOne
