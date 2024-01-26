@@ -1,0 +1,1 @@
+ALTER TABLE tb_user RENAME COLUMN imageUrl TO image_url;
