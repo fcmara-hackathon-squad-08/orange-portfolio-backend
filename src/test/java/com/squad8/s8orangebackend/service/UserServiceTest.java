@@ -38,6 +38,7 @@ public class UserServiceTest {
         assertEquals("name", user.getName());
         assertEquals("lastname", user.getSurname());
         assertEquals("email@gmail.com", user.getEmail());
+        assertEquals("password", user.getPassword());
 
     }
 
