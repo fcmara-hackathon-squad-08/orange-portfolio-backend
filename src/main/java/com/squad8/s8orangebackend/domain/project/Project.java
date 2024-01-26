@@ -1,7 +1,8 @@
 package com.squad8.s8orangebackend.domain.project;
 import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,12 +14,13 @@ public class Project  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotEmpty(message = "Informe um nome para o projeto")
+    @NotNull
     private String title;
-    @NotEmpty(message = "Informe ao menos uma tag para o projeto")
+    @NotNull
     private EnumTag tag;
+    @NotNull
     private String link;
-    @NotEmpty(message = "Informe a decricao do projeto")
+    @NotNull
     private String description;
 
     @ManyToOne
