@@ -1,20 +1,5 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/sq8OrangeFcamara
-    username: adm
-    password: adm
-
+  profiles:
+    active: dev
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    #hibernate.ddl-auto: update
-    properties:
-      hibernate:
-        '[show_sql]': true
-        '[format_sql]': true
-springdoc:
-  api-docs:
-    path: /api-docs
-
-  swagger-ui:
-    path: /swagger-ui-custom.html
-    operationsSorter: method
+    open-in-view: true
