@@ -18,7 +18,6 @@ public class ProjectRegistrationDto {
     private String description;
     @NotNull
     private Long idUser;
-
     public ProjectRegistrationDto() {
     }
 
