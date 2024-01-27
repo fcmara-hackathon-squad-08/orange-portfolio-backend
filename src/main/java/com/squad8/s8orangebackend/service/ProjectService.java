@@ -28,6 +28,7 @@ public class ProjectService {
         project.setTag(projectRegistrationDTO.getTag());
         project.setLink(projectRegistrationDTO.getLink());
         project.setDescription(projectRegistrationDTO.getDescription());
+        project.setImageUrl(projectRegistrationDTO.getImageUrl());
         project.setUser(user);
 
         return projectRepository.save(project);

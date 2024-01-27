@@ -24,6 +24,8 @@ public class Project  implements Serializable {
     @NotEmpty
     private String description;
 
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -31,12 +33,13 @@ public class Project  implements Serializable {
     public Project() {
     }
 
-    public Project(Long id, String title, EnumTag tag, String link, String description, User user) {
+    public Project(Long id, String title, EnumTag tag, String link, String description, String imageUrl, User user) {
         this.id = id;
         this.title = title;
         this.tag = tag;
         this.link = link;
         this.description = description;
+        this.imageUrl = imageUrl;
         this.user = user;
     }
 
@@ -78,6 +81,14 @@ public class Project  implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public User getUser() {

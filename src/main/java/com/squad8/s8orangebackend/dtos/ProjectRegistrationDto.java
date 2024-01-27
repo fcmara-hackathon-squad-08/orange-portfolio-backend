@@ -16,6 +16,8 @@ public class ProjectRegistrationDto {
     private String link;
     @NotEmpty
     private String description;
+
+    private String imageUrl;
     @NotNull
     private Long idUser;
     public ProjectRegistrationDto() {
@@ -26,6 +28,7 @@ public class ProjectRegistrationDto {
         this.tag = project.getTag();
         this.link = project.getLink();
         this.description = project.getDescription();
+        this.imageUrl = project.getImageUrl();
         this.idUser = user.getId();
     }
 
@@ -59,6 +62,14 @@ public class ProjectRegistrationDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getIdUser() {

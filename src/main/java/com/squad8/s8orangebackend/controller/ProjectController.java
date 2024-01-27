@@ -1,4 +1,6 @@
 package com.squad8.s8orangebackend.controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.dtos.ProjectRegistrationDto;
 import com.squad8.s8orangebackend.service.ProjectService;
@@ -6,15 +8,14 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
+import java.util.List;
+
 @RestController
 @RequestMapping("/project")
-public class ProjectRegistrationController {
+public class ProjectController {
     @Autowired
     private ProjectService projectService;
     @Transactional
@@ -25,4 +26,16 @@ public class ProjectRegistrationController {
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(project.getId()).toUri();
         return ResponseEntity.created(uri).body(project);
     }
+    @GetMapping("/list")
+    public ResponseEntity<List<Project>> listProject() {
+        List<Project> projects = projectService.listProjects();
+        return ResponseEntity.ok().body(projects);
+    }
+
+    /*
+    @Transactional
+    @DeleteMapping("/delete")
+    }
+    */
+
 }
