@@ -27,7 +27,7 @@ public class UserService {
 
     public User updateUserBasicInformation(Long id, User user) {
         try {
-            User entity = userRepository.findById(id).orElseThrow();
+            User entity = userRepository.getReferenceById(id);
             updateData(entity, user);
             return userRepository.save(entity);
         } catch (Exception e) {
