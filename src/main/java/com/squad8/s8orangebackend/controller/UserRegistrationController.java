@@ -9,21 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
 @RestController
-@RequestMapping("/user")
 public class UserRegistrationController {
 
     @Autowired
     private UserService userService;
 
     @Transactional
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<User> insertUser(@RequestBody @Validated UserRegistrationDto userRegistrationDTO, UriComponentsBuilder uriComponentsBuilder) {
         User user = userService.fromDto(userRegistrationDTO);
         user = userService.insertUser(user);
