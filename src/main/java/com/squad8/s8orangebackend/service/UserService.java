@@ -7,6 +7,9 @@ import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -18,14 +21,32 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public List<User> findAllUser() {
+        return userRepository.findAll();
+    }
+
     public User updateUserBasicInformation(Long id, User user) {
         try {
-            User entity = userRepository.getReferenceById(id);
+            User entity = userRepository.findById(id).orElseThrow();
             updateData(entity, user);
             return userRepository.save(entity);
         } catch (Exception e) {
             throw new ResourceNotFoundException(id);
         }
+    }
+
+    public void updateParcialUser(Long id, Map<String, Object> fields) {
+        User user = userRepository.getReferenceById(id);
+
+        fields.forEach((propertyCountry, propertyImageUrl) -> {
+            if (propertyCountry.equals("country")) {
+                user.setCountry(propertyCountry);
+            }
+
+            if (propertyImageUrl.equals("image_url")) {
+                user.setImageUrl((String) propertyImageUrl);
+            }
+        });
     }
 
     private void updateData(User entity, User user) {
