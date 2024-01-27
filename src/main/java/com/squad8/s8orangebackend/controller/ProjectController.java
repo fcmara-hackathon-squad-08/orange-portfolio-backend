@@ -32,10 +32,12 @@ public class ProjectController {
         return ResponseEntity.ok().body(projects);
     }
 
-    /*
-    @Transactional
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id){
+        projectService.deleteProject(id);
+
+        return ResponseEntity.noContent().build();
     }
-    */
+
 
 }
