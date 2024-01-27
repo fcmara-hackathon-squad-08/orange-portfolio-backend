@@ -12,5 +12,9 @@ springdoc:
     path: /api-docs
 
   swagger-ui:
-    path: /swagger-ui-custom.html
     operationsSorter: method
+
+api:
+  security:
+    token:
+      secret: ${TOKEN_SECRET}
