@@ -1,5 +1,6 @@
 package com.squad8.s8orangebackend.domain.project;
 import com.squad8.s8orangebackend.domain.user.User;
+import com.squad8.s8orangebackend.enums.EnumTag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
