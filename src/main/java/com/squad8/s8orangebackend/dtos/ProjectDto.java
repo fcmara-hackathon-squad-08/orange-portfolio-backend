@@ -2,10 +2,12 @@ package com.squad8.s8orangebackend.dtos;
 
 import com.squad8.s8orangebackend.domain.project.EnumTag;
 import com.squad8.s8orangebackend.domain.project.Project;
+import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class ProjectDto {
+
     @NotNull
     private String title;
     @NotNull
@@ -15,15 +17,18 @@ public class ProjectDto {
     @NotEmpty
     private String description;
     private String imageUrl;
-
+    @NotNull
+    private Long idUser;
     public ProjectDto() {
     }
-    public ProjectDto(Project project) {
+
+    public ProjectDto(Project project, User user) {
         this.title = project.getTitle();
         this.tag = project.getTag();
         this.link = project.getLink();
         this.description = project.getDescription();
         this.imageUrl = project.getImageUrl();
+        this.idUser = user.getId();
     }
 
     public String getTitle() {
@@ -64,5 +69,13 @@ public class ProjectDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 }
