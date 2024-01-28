@@ -3,6 +3,7 @@ package com.squad8.s8orangebackend.service;
 import com.squad8.s8orangebackend.domain.user.MyUserPrincipal;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorizationService implements UserDetailsService {
 
     @Autowired
