@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/project")
@@ -31,11 +32,9 @@ public class ProjectController {
         List<Project> projects = projectService.listProjects();
         return ResponseEntity.ok().body(projects);
     }
-
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id){
         projectService.deleteProject(id);
-
         return ResponseEntity.noContent().build();
     }
 

@@ -4,9 +4,12 @@ import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.ProjectRegistrationDto;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
+import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class ProjectService {
     @Autowired
@@ -23,19 +26,25 @@ public class ProjectService {
     public Project fromDto(ProjectRegistrationDto projectRegistrationDTO) {
         Project project = new Project();
         User user = userRepository.findById(projectRegistrationDTO.getIdUser()).orElseThrow();
-
         project.setTitle(projectRegistrationDTO.getTitle());
         project.setTag(projectRegistrationDTO.getTag());
         project.setLink(projectRegistrationDTO.getLink());
         project.setDescription(projectRegistrationDTO.getDescription());
         project.setImageUrl(projectRegistrationDTO.getImageUrl());
         project.setUser(user);
-
         return projectRepository.save(project);
     }
+
+
     public void deleteProject(Long id) {
-        boolean project = projectRepository.existsById(id);
-        if (project)
-            projectRepository.deleteById(id);
+        try {
+            boolean project = projectRepository.existsById(id);
+            if (project)
+                projectRepository.deleteById(id);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(id);
+        }
     }
+
+
 }
