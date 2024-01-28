@@ -2,14 +2,15 @@ package com.squad8.s8orangebackend.service;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
+import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,10 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
+    public Set<EnumTag> listTags() {
+        return new HashSet<>(List.of(EnumTag.values()));
+    }
+
     public Project insertProject(Project project) {
         return projectRepository.save(project);
     }
@@ -31,7 +36,6 @@ public class ProjectService {
         Project project = new Project();
         User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
         project.setTitle(projectDto.getTitle());
-        project.setTag(projectDto.getTag());
         project.setLink(projectDto.getLink());
         project.setDescription(projectDto.getDescription());
         project.setImageUrl(projectDto.getImageUrl());
@@ -62,7 +66,6 @@ public class ProjectService {
     private void updateData(Project entity, ProjectDto projectDto) {
         User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
         entity.setTitle(projectDto.getTitle());
-        entity.setTag(projectDto.getTag());
         entity.setLink(projectDto.getLink());
         entity.setDescription(projectDto.getDescription());
         entity.setImageUrl(projectDto.getImageUrl());

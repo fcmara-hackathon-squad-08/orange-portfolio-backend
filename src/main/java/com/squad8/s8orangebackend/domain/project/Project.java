@@ -7,7 +7,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_project")
 public class Project  implements Serializable {
@@ -19,7 +22,7 @@ public class Project  implements Serializable {
     @NotNull
     private String title;
     @NotNull
-    private EnumTag tag;
+    private Set<EnumTag> tag = new HashSet<>();
     @NotNull
     private String link;
     @NotEmpty
@@ -36,7 +39,7 @@ public class Project  implements Serializable {
     public Project(Long id, String title, EnumTag tag, String link, String description, String imageUrl, User user) {
         this.id = id;
         this.title = title;
-        this.tag = tag;
+        this.tag.add(tag);
         this.link = link;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -59,12 +62,8 @@ public class Project  implements Serializable {
         this.title = title;
     }
 
-    public EnumTag getTag() {
+    public Set<EnumTag> getTag() {
         return tag;
-    }
-
-    public void setTag(EnumTag tag) {
-        this.tag = tag;
     }
 
     public String getLink() {

@@ -6,12 +6,13 @@ import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Set;
+
 public class ProjectDto {
 
     @NotNull
     private String title;
-    @NotNull
-    private EnumTag tag;
+    private Set<EnumTag> tag;
     @NotNull
     private String link;
     @NotEmpty
@@ -39,11 +40,11 @@ public class ProjectDto {
         this.title = title;
     }
 
-    public EnumTag getTag() {
+    public Set<EnumTag> getTag() {
         return tag;
     }
 
-    public void setTag(EnumTag tag) {
+    public void setTag(Set<EnumTag> tag) {
         this.tag = tag;
     }
 

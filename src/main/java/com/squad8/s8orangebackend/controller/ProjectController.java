@@ -1,5 +1,6 @@
 package com.squad8.s8orangebackend.controller;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
+import com.squad8.s8orangebackend.enums.EnumTag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.squad8.s8orangebackend.domain.project.Project;
@@ -13,12 +14,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+
     @Transactional
     @PostMapping("/add")
     public ResponseEntity<Project> insertProject(@RequestBody @Validated ProjectDto projectDTO, UriComponentsBuilder uriComponentsBuilder){
@@ -32,6 +35,13 @@ public class ProjectController {
         List<Project> projects = projectService.listProjects();
         return ResponseEntity.ok().body(projects);
     }
+
+    @GetMapping("/tags/list")
+    public ResponseEntity<Set<EnumTag>> listTags() {
+        Set<EnumTag> tags = projectService.listTags();
+        return ResponseEntity.ok().body(tags);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id){
         projectService.deleteProject(id);
