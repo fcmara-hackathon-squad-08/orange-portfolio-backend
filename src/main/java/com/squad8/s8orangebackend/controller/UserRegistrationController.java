@@ -4,6 +4,7 @@ import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.UserRegistrationDto;
 import com.squad8.s8orangebackend.service.UserService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
+@RequiredArgsConstructor
 public class UserRegistrationController {
 
     @Autowired

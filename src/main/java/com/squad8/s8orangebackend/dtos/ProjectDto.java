@@ -1,6 +1,6 @@
 package com.squad8.s8orangebackend.dtos;
 
-import com.squad8.s8orangebackend.domain.project.EnumTag;
+import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
