@@ -1,6 +1,7 @@
 package com.squad8.s8orangebackend.domain.user;
 
 import com.squad8.s8orangebackend.domain.project.Project;
+import com.squad8.s8orangebackend.enums.UserRole;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -15,7 +16,7 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1l;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
@@ -27,6 +28,9 @@ public class User implements Serializable {
     private String password;
     private String country;
     private String imageUrl;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole userRole;
 
     @OneToMany(mappedBy = "user")
     private List<Project> projects;
@@ -49,6 +53,7 @@ public class User implements Serializable {
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.setUserRole(UserRole.USER_ROLE);
     }
 
     public User(Long id, String name, String surname, String email, String password) {
@@ -113,6 +118,14 @@ public class User implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

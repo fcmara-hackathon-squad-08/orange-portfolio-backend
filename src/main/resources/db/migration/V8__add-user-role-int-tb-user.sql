@@ -1,0 +1,1 @@
+ALTER TABLE tb_user ADD user_role TEXT DEFAULT 'USER_ROLE' NOT NULL;
