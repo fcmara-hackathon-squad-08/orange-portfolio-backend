@@ -6,7 +6,7 @@ import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class ProjectRegistrationDto {
+public class ProjectDto {
 
     @NotNull
     private String title;
@@ -16,14 +16,13 @@ public class ProjectRegistrationDto {
     private String link;
     @NotEmpty
     private String description;
-
     private String imageUrl;
     @NotNull
     private Long idUser;
-    public ProjectRegistrationDto() {
+    public ProjectDto() {
     }
 
-    public ProjectRegistrationDto(Project project, User user) {
+    public ProjectDto(Project project, User user) {
         this.title = project.getTitle();
         this.tag = project.getTag();
         this.link = project.getLink();

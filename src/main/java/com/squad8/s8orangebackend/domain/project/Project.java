@@ -23,7 +23,6 @@ public class Project  implements Serializable {
     private String link;
     @NotEmpty
     private String description;
-
     private String imageUrl;
 
     @ManyToOne
