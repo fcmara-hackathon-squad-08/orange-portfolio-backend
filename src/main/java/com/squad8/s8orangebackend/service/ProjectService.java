@@ -5,15 +5,18 @@ import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
     private UserRepository userRepository;
 
     public List<Project> listProjects() {

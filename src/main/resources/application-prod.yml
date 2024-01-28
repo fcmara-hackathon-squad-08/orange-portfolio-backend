@@ -4,9 +4,6 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
 springdoc:
   api-docs:
     path: /api-docs
