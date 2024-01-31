@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -66,6 +68,8 @@ public class ProjectService {
         project.setDescription(projectDto.getDescription());
         project.setImageUrl(projectDto.getImageUrl());
         project.setUser(userService.getCurrentUser());
+        project.setCreatedAt(LocalDateTime.now());
+        project.setUpdatedAt(LocalDateTime.now());
         return projectRepository.save(project);
     }
 
