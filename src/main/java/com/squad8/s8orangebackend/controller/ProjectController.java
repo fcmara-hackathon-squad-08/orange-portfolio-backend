@@ -42,6 +42,12 @@ public class ProjectController {
         return ResponseEntity.ok().body(projects);
     }
 
+    @GetMapping("/list/tags/user")
+    public ResponseEntity<List<Project>> listProjectByCurrentUser(@RequestParam(required = false) List<EnumTag> tags) {
+        List<Project> projects = projectService.listAllUserProjectWithTagOrWithoutTag(tags);
+        return ResponseEntity.ok().body(projects);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id){
         projectService.deleteProject(id);

@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -42,6 +41,22 @@ public class ProjectService {
             }
         } else {
             projects = projectRepository.findAllDistinctProject();
+        }
+
+        return projects;
+    }
+
+    public List<Project> listAllUserProjectWithTagOrWithoutTag(List<EnumTag> tags) {
+        List<Project> projects = new ArrayList<>();
+
+        User user = userService.getCurrentUser();
+        boolean isNull = tags == null;
+        if (!isNull) {
+            for (EnumTag tag : tags) {
+                projects.addAll(projectRepository.findAllDistinctProjectByUserAndTag(tag.name().toUpperCase(), user.getId()));
+            }
+        } else {
+            projects = projectRepository.findAllDistinctProjectByUser(user.getId());
         }
 
         return projects;
