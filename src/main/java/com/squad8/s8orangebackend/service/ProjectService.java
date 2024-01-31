@@ -72,7 +72,7 @@ public class ProjectService {
         Project project = projectRepository.findById(id).orElse(null);
         try {
             if (project != null && project.getUser().getId().equals(principal))
-                projectRepository.deleteById(project.getId());
+                projectRepository.delete(project);
         } catch (Exception e) {
             throw new ResourceNotFoundException(id);
         }
