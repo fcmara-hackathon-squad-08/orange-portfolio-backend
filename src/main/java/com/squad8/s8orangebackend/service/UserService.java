@@ -25,7 +25,6 @@ public class UserService {
 
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        principal = ((MyUserPrincipal) principal);
         if (principal != null && principal instanceof MyUserPrincipal) {
             User credentials = ((MyUserPrincipal) principal).user();
             return credentials;
@@ -53,8 +52,8 @@ public class UserService {
         }
     }
 
-    public void updatePartialUser(Long id, Map<String, Object> fields) {
-        User user = userRepository.getReferenceById(id);
+    public void updatePartialUser(Map<String, Object> fields) {
+        User user = userRepository.getReferenceById(getCurrentUser().getId());
 
         fields.forEach((propertyName, propertyValue) -> {
             if (propertyName.equals("country")) {

@@ -4,6 +4,7 @@ import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.UserRegistrationDto;
 import com.squad8.s8orangebackend.service.UserService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserRegistrationController {
 
     @Transactional
     @PostMapping("/user/register")
-    public ResponseEntity<User> insertUser(@RequestBody @Validated UserRegistrationDto userRegistrationDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<User> insertUser(@RequestBody @Valid UserRegistrationDto userRegistrationDTO, UriComponentsBuilder uriComponentsBuilder) {
         User user = userService.fromDto(userRegistrationDTO);
         user = userService.insertUser(user);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(user.getId()).toUri();

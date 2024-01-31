@@ -5,9 +5,9 @@ import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.service.ProjectService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,7 +23,7 @@ public class ProjectController {
 
     @Transactional
     @PostMapping("/add")
-    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestBody @Validated ProjectDto projectDto, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestBody @Valid ProjectDto projectDto, UriComponentsBuilder uriComponentsBuilder){
         Project project = projectService.fromDto(projectDto);
         project = projectService.insertProject(project, tags);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(project.getId()).toUri();
