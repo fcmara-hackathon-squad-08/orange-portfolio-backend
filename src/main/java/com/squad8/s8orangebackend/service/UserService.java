@@ -30,7 +30,6 @@ public class UserService {
             return credentials;
         }
         return null;
-
     }
 
     public User insertUser(User user) {

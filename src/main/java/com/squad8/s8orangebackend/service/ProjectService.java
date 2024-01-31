@@ -10,6 +10,7 @@ import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -68,11 +69,11 @@ public class ProjectService {
         project.setUser(userService.getCurrentUser());
         return projectRepository.save(project);
     }
-
     public void deleteProject(Long id) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Project project = projectRepository.findById(id).orElse(null);
         try {
-            boolean project = projectRepository.existsById(id);
-            if (project)
+            if (project != null && project.getUser().getId().equals(principal))
                 projectRepository.deleteById(id);
         } catch (Exception e) {
             throw new ResourceNotFoundException(id);
@@ -97,7 +98,8 @@ public class ProjectService {
         entity.setImageUrl(projectDto.getImageUrl());
         //entity.setUser(user);
     }
-    public void updatePartialProject(Long id, Map<String, Object> fields) {
+
+    /*public void updatePartialProject(Long id, Map<String, Object> fields) {
         Project project = projectRepository.getReferenceById(id);
         fields.forEach((propertyName, propertyValue) ->{
             if(propertyName.equals("imageUrl")){
@@ -105,6 +107,6 @@ public class ProjectService {
             }
         });
         projectRepository.save(project);
-    }
+    }*/
 
 }

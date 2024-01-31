@@ -52,9 +52,8 @@ public class ProjectController {
         Project project = projectService.updateProjectBasicInformation(id, projectDto);
         return ResponseEntity.ok().body(project);
     }
-    @PatchMapping("/{id}")
+    /*@PatchMapping("/{id}")
     public ResponseEntity<Void> updateProject(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
         projectService.updatePartialProject(id, fields);
-        return ResponseEntity.ok().build();
-    }
+        return ResponseEntity.ok().build();}*/
 }
