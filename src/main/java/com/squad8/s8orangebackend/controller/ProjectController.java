@@ -37,7 +37,7 @@ public class ProjectController {
     }
 
     @GetMapping("/list/tags")
-    public ResponseEntity<List<Project>> listProject(@RequestParam List<EnumTag> tags) {
+    public ResponseEntity<List<Project>> listProject(@RequestParam(required = false) List<EnumTag> tags) {
         List<Project> projects = projectService.listProjectByTag(tags);
         return ResponseEntity.ok().body(projects);
     }

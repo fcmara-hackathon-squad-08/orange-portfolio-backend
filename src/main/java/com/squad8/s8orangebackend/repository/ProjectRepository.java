@@ -10,8 +10,13 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Query("""
             SELECT distinct(pj) FROM Project AS pj
-            JOIN pj.tags as tg
-            WHERE tg.tag = :tag
+            LEFT JOIN pj.tags as tg
+            WHERE tg.tag = :tag OR tg.id IS NULL
             """)
     List<Project> findProjectByTag(String tag);
+
+    @Query("""
+            SELECT distinct(pj) FROM Project as pj
+            """)
+    List<Project> findAllDistinctProject();
 }

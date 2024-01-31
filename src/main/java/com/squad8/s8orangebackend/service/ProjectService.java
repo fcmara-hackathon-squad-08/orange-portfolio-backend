@@ -33,9 +33,15 @@ public class ProjectService {
     public List<Project> listProjectByTag(List<EnumTag> tags) {
         List<Project> projects = new ArrayList<>();
 
-        tags.forEach(tag ->
-                projects.addAll(projectRepository.findProjectByTag(tag.name().toUpperCase()))
-        );
+        boolean isNull = tags == null;
+        if (!isNull) {
+            for (EnumTag tag : tags) {
+                projects.addAll(projectRepository.findProjectByTag(tag.name().toUpperCase()));
+            }
+        } else {
+            projects = projectRepository.findAllDistinctProject();
+        }
+
         return projects;
     }
 
