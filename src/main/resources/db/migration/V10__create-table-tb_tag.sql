@@ -1,0 +1,4 @@
+CREATE TABLE tb_tag (
+    id SERIAL PRIMARY KEY,
+    tag VARCHAR(10) NOT NULL
+);

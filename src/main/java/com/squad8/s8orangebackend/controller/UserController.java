@@ -24,9 +24,9 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
-        userService.updatePartialUser(id, fields);
+    @PatchMapping("/currentUser")
+    public ResponseEntity<Void> updateUser(@RequestBody Map<String, Object> fields) {
+        userService.updatePartialUser(fields);
         return ResponseEntity.ok().build();
     }
 

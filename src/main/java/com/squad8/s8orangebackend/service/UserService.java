@@ -1,11 +1,13 @@
 package com.squad8.s8orangebackend.service;
 
+import com.squad8.s8orangebackend.domain.user.MyUserPrincipal;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.UserRegistrationDto;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,16 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public User getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal != null && principal instanceof MyUserPrincipal) {
+            User credentials = ((MyUserPrincipal) principal).user();
+            return credentials;
+        }
+        return null;
+
+    }
 
     public User insertUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -40,8 +52,8 @@ public class UserService {
         }
     }
 
-    public void updatePartialUser(Long id, Map<String, Object> fields) {
-        User user = userRepository.getReferenceById(id);
+    public void updatePartialUser(Map<String, Object> fields) {
+        User user = userRepository.getReferenceById(getCurrentUser().getId());
 
         fields.forEach((propertyName, propertyValue) -> {
             if (propertyName.equals("country")) {
