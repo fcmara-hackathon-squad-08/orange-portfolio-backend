@@ -1,9 +1,8 @@
 package com.squad8.s8orangebackend.controller;
+
+import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.enums.EnumTag;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.service.ProjectService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/project")
@@ -30,16 +29,17 @@ public class ProjectController {
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(project.getId()).toUri();
         return ResponseEntity.created(uri).body(project);
     }
+
     @GetMapping("/list")
     public ResponseEntity<List<Project>> listProject() {
         List<Project> projects = projectService.listProjects();
         return ResponseEntity.ok().body(projects);
     }
 
-    @GetMapping("/tags/list")
-    public ResponseEntity<Set<EnumTag>> listTags() {
-        Set<EnumTag> tags = projectService.listTags();
-        return ResponseEntity.ok().body(tags);
+    @GetMapping("/list/tags")
+    public ResponseEntity<List<Project>> listProject(@RequestParam List<EnumTag> tags) {
+        List<Project> projects = projectService.listProjectByTag(tags);
+        return ResponseEntity.ok().body(projects);
     }
 
     @DeleteMapping("/{id}")

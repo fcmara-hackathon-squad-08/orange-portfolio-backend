@@ -1,9 +1,11 @@
 package com.squad8.s8orangebackend.service;
 import com.squad8.s8orangebackend.domain.project.Project;
+import com.squad8.s8orangebackend.domain.tag.Tag;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
+import com.squad8.s8orangebackend.repository.TagRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +21,22 @@ public class ProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TagRepository tagRepository;
+    @Autowired
+    private UserService userService;
 
     public List<Project> listProjects() {
         return projectRepository.findAll();
     }
 
-    public Set<EnumTag> listTags() {
-        return new HashSet<>(List.of(EnumTag.values()));
+    public List<Project> listProjectByTag(List<EnumTag> tags) {
+        List<Project> projects = new ArrayList<>();
+
+        tags.forEach(tag ->
+                projects.addAll(projectRepository.findProjectByTag(tag.name().toUpperCase()))
+        );
+        return projects;
     }
 
     public Project insertProject(Project project) {
@@ -34,12 +45,10 @@ public class ProjectService {
 
     public Project fromDto(ProjectDto projectDto) {
         Project project = new Project();
-        User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
         project.setTitle(projectDto.getTitle());
         project.setLink(projectDto.getLink());
         project.setDescription(projectDto.getDescription());
         project.setImageUrl(projectDto.getImageUrl());
-        project.setUser(user);
         return projectRepository.save(project);
     }
 
@@ -64,12 +73,12 @@ public class ProjectService {
         }
     }
     private void updateData(Project entity, ProjectDto projectDto) {
-        User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
+        //User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
         entity.setTitle(projectDto.getTitle());
         entity.setLink(projectDto.getLink());
         entity.setDescription(projectDto.getDescription());
         entity.setImageUrl(projectDto.getImageUrl());
-        entity.setUser(user);
+        //entity.setUser(user);
     }
     public void updatePartialProject(Long id, Map<String, Object> fields) {
         Project project = projectRepository.getReferenceById(id);
@@ -80,4 +89,5 @@ public class ProjectService {
         });
         projectRepository.save(project);
     }
+
 }

@@ -1,35 +1,26 @@
 package com.squad8.s8orangebackend.dtos;
 
-import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.domain.project.Project;
-import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.Set;
 
 public class ProjectDto {
 
     @NotNull
     private String title;
-    private Set<EnumTag> tag;
     @NotNull
     private String link;
     @NotEmpty
     private String description;
     private String imageUrl;
-    @NotNull
-    private Long idUser;
     public ProjectDto() {
     }
 
-    public ProjectDto(Project project, User user) {
+    public ProjectDto(Project project) {
         this.title = project.getTitle();
-        this.tag = project.getTag();
         this.link = project.getLink();
         this.description = project.getDescription();
         this.imageUrl = project.getImageUrl();
-        this.idUser = user.getId();
     }
 
     public String getTitle() {
@@ -38,14 +29,6 @@ public class ProjectDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Set<EnumTag> getTag() {
-        return tag;
-    }
-
-    public void setTag(Set<EnumTag> tag) {
-        this.tag = tag;
     }
 
     public String getLink() {
@@ -72,11 +55,4 @@ public class ProjectDto {
         this.imageUrl = imageUrl;
     }
 
-    public Long getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
 }
