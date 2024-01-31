@@ -9,14 +9,15 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Query("""
-            SELECT distinct(pj) FROM Project AS pj
-            LEFT JOIN pj.tags as tg
+            SELECT distinct(pj), tg.tag FROM Project AS pj
+            JOIN pj.tags as tg
             WHERE tg.tag = :tag
             """)
     List<Project> findProjectByTag(String tag);
 
     @Query("""
-            SELECT distinct(pj) FROM Project as pj
+            SELECT distinct(pj), tg.tag FROM Project as pj
+            JOIN pj.tags as tg
             """)
     List<Project> findAllDistinctProject();
 }

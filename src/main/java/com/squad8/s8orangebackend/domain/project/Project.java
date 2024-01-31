@@ -1,6 +1,5 @@
 package com.squad8.s8orangebackend.domain.project;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.squad8.s8orangebackend.domain.tag.Tag;
 import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.persistence.*;
@@ -30,7 +29,6 @@ public class Project  implements Serializable {
     private String description;
     private String imageUrl;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "tb_project_tag", joinColumns = @JoinColumn(name = "project_id"),
     inverseJoinColumns = @JoinColumn(name = "tag_id"))
@@ -100,7 +98,6 @@ public class Project  implements Serializable {
         this.user = user;
     }
 
-    @JsonIgnore
     public Set<Tag> getTags() {
         return tags;
     }
