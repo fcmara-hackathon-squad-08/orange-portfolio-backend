@@ -1,6 +1,7 @@
 package com.squad8.s8orangebackend.dtos;
 
 import com.squad8.s8orangebackend.domain.project.Project;
+import com.squad8.s8orangebackend.domain.user.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,6 +22,7 @@ public class ProjectDto {
         this.link = project.getLink();
         this.description = project.getDescription();
         this.imageUrl = project.getImageUrl();
+        User user = project.getUser();
     }
 
     public String getTitle() {

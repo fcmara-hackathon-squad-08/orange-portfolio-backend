@@ -40,9 +40,6 @@ public class ProjectService {
     }
 
     public Project insertProject(Project project, List<EnumTag> tags) {
-        User currentUser = userService.getCurrentUser();
-        User user = userRepository.getReferenceById(currentUser.getId());
-        project.setUser(user);
         List<Tag> projectTags = tags.stream()
                 .map(tag -> {
                     String tagName = tag.name().toUpperCase();
@@ -62,6 +59,7 @@ public class ProjectService {
         project.setLink(projectDto.getLink());
         project.setDescription(projectDto.getDescription());
         project.setImageUrl(projectDto.getImageUrl());
+        project.setUser(userService.getCurrentUser());
         return projectRepository.save(project);
     }
 
