@@ -58,8 +58,6 @@ public class ProjectService {
 
         return projectRepository.save(project);
     }
-
-
     public Project fromDto(ProjectDto projectDto) {
         Project project = new Project();
         project.setTitle(projectDto.getTitle());
@@ -74,7 +72,7 @@ public class ProjectService {
         Project project = projectRepository.findById(id).orElse(null);
         try {
             if (project != null && project.getUser().getId().equals(principal))
-                projectRepository.deleteById(id);
+                projectRepository.deleteById(project.getId());
         } catch (Exception e) {
             throw new ResourceNotFoundException(id);
         }
