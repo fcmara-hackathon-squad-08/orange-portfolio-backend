@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -28,6 +30,8 @@ public class Project  implements Serializable {
     @NotEmpty
     private String description;
     private String imageUrl;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @ManyToMany
     @JoinTable(name = "tb_project_tag", joinColumns = @JoinColumn(name = "project_id"),
@@ -48,6 +52,8 @@ public class Project  implements Serializable {
         this.description = description;
         this.imageUrl = imageUrl;
         this.user = user;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -100,6 +106,22 @@ public class Project  implements Serializable {
 
     public Set<Tag> getTags() {
         return tags;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
