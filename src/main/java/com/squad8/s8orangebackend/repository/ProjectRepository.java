@@ -16,8 +16,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findProjectByTag(String tag);
 
     @Query("""
-            SELECT distinct(pj), tg.tag FROM Project as pj
-            JOIN pj.tags as tg
+            SELECT distinct(pj) FROM Project as pj
             """)
     List<Project> findAllDistinctProject();
 }
