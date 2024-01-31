@@ -23,9 +23,9 @@ public class ProjectController {
 
     @Transactional
     @PostMapping("/add")
-    public ResponseEntity<Project> insertProject(@RequestBody @Validated ProjectDto projectDTO, UriComponentsBuilder uriComponentsBuilder){
-        Project project = projectService.fromDto(projectDTO);
-        project = projectService.insertProject(project);
+    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestBody @Validated ProjectDto projectDto, UriComponentsBuilder uriComponentsBuilder){
+        Project project = projectService.fromDto(projectDto);
+        project = projectService.insertProject(project, tags);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(project.getId()).toUri();
         return ResponseEntity.created(uri).body(project);
     }

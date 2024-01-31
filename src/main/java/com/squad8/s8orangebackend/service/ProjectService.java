@@ -39,9 +39,22 @@ public class ProjectService {
         return projects;
     }
 
-    public Project insertProject(Project project) {
+    public Project insertProject(Project project, List<EnumTag> tags) {
+        User currentUser = userService.getCurrentUser();
+        User user = userRepository.getReferenceById(currentUser.getId());
+        project.setUser(user);
+        List<Tag> projectTags = tags.stream()
+                .map(tag -> {
+                    String tagName = tag.name().toUpperCase();
+                    return tagRepository.findTagByTag(tagName);
+                })
+                .toList();
+
+        project.getTags().addAll(projectTags);
+
         return projectRepository.save(project);
     }
+
 
     public Project fromDto(ProjectDto projectDto) {
         Project project = new Project();
