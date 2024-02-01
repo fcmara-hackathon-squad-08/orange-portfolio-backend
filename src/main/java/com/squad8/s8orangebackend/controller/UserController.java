@@ -18,21 +18,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        user = userService.updateUserBasicInformation(id, user);
+    @PutMapping("/me")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        user = userService.updateUserBasicInformation(user);
         return ResponseEntity.ok().body(user);
     }
 
-    @PatchMapping("/currentUser")
+    @PatchMapping("/partial/me")
     public ResponseEntity<Void> updateUser(@RequestBody Map<String, Object> fields) {
         userService.updatePartialUser(fields);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> findProductById() {
-        List<User> users = userService.findAllUser();
-        return ResponseEntity.ok().body(users);
-    }
 }
