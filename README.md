@@ -38,7 +38,7 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
 
 ## Endpoints
 - 
-- API Documentation: ```https://sq8-orange-fcamra.onrender.com//swagger-ui/custom.html```
+- API Documentation: ```https://sq8-orange-fcamra.onrender.com/swagger-ui/custom.html```
   
 - Authentication:
   
