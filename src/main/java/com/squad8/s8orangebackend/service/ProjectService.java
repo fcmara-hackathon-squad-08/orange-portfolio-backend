@@ -109,12 +109,10 @@ public class ProjectService {
         }
     }
     private void updateData(Project entity, ProjectDto projectDto) {
-        //User user = userRepository.findById(projectDto.getIdUser()).orElseThrow();
         entity.setTitle(projectDto.getTitle());
         entity.setLink(projectDto.getLink());
         entity.setDescription(projectDto.getDescription());
         entity.setImageUrl(projectDto.getImageUrl());
-        //entity.setUser(user);
     }
     public void updatePartialProject(Long id, Map<String, Object> fields) {
         Project project = projectRepository.getReferenceById(id);

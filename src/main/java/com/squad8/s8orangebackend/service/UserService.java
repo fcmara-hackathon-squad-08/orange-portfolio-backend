@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -38,17 +37,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> findAllUser() {
-        return userRepository.findAll();
-    }
-
-    public User updateUserBasicInformation(Long id, User user) {
+    public User updateUserBasicInformation(User user) {
         try {
-            User entity = userRepository.getReferenceById(id);
+            User entity = getCurrentUser();
             updateData(entity, user);
             return userRepository.save(entity);
         } catch (Exception e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException(user.getId());
         }
     }
 
