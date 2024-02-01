@@ -37,7 +37,8 @@ The Orange Portfolio is a web app that allows users to share their projects onli
 This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
 
 ## Endpoints
-- API Documentation: ```/swagger-ui/custom.html```
+- 
+- API Documentation: ```https://sq8-orange-fcamra.onrender.com//swagger-ui/custom.html```
   
 - Authentication:
   
