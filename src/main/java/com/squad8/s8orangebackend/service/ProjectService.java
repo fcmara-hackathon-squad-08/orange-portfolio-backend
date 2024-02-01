@@ -93,23 +93,39 @@ public class ProjectService {
         if (isProjectSaved && isProjectUserOwner) {
             projectRepository.deleteById(id);
         } else {
-            throw new UnauthorizedAccessException("User is not the owner of the project");
+            throw new UnauthorizedAccessException("User is not the owner of the project" + id);
         }
     }
-    public Project updateProjectBasicInformation(Long id, ProjectDto projectDto) {
-
-        try {
+    public Project updateFromDto(Long id, ProjectDto projectDto) {
+        boolean isProjectSaved = projectRepository.existsById(id);
+        boolean isProjectUserOwner = Objects.equals(projectRepository.getReferenceById(id).getUser().getId(), userService.getCurrentUser().getId());
+        if (isProjectSaved && isProjectUserOwner) {
             Project entity = projectRepository.getReferenceById(id);
             updateData(entity, projectDto);
             return projectRepository.save(entity);
-        } catch (Exception e) {
-            throw new ResourceNotFoundException(id);
+        } else {
+            throw new UnauthorizedAccessException("User is not the owner of the project" + id);
         }
+    }
+    public Project updateProject(Project project, List<EnumTag> tags ){
+        List<Tag> projectTags = tags.stream()
+                .map(tag -> {
+                    String tagName = tag.name().toUpperCase();
+                    return tagRepository.findTagByTag(tagName);
+                })
+                .toList();
+
+        project.getTags().clear();
+        project.getTags().addAll(projectTags);
+        return projectRepository.save(project);
     }
     private void updateData(Project entity, ProjectDto projectDto) {
         entity.setTitle(projectDto.getTitle());
         entity.setLink(projectDto.getLink());
         entity.setDescription(projectDto.getDescription());
         entity.setImageUrl(projectDto.getImageUrl());
+        entity.setUser(userService.getCurrentUser());
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setUpdatedAt(LocalDateTime.now());
     }
 }
