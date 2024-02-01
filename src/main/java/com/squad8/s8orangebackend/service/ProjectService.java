@@ -8,6 +8,7 @@ import com.squad8.s8orangebackend.repository.ProjectRepository;
 import com.squad8.s8orangebackend.repository.TagRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
+import com.squad8.s8orangebackend.service.exceptions.UnauthorizedAccessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,16 +69,14 @@ public class ProjectService {
         return projectRepository.save(project);
     }
     public void deleteProject(Long id) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Project project = projectRepository.findById(id).orElse(null);
-        try {
-            if (project != null && project.getUser().getId().equals(principal))
-                projectRepository.delete(project);
-        } catch (Exception e) {
-            throw new ResourceNotFoundException(id);
+        boolean isProjectSaved = projectRepository.existsById(id);
+        boolean isProjectUserOwner = Objects.equals(projectRepository.getReferenceById(id).getUser().getId(), userService.getCurrentUser().getId());
+        if (isProjectSaved && isProjectUserOwner) {
+            projectRepository.deleteById(id);
+        } else {
+            throw new UnauthorizedAccessException("User is not the owner of the project");
         }
     }
-
     public Project updateProjectBasicInformation(Long id, ProjectDto projectDto) {
 
         try {
@@ -96,15 +95,4 @@ public class ProjectService {
         entity.setImageUrl(projectDto.getImageUrl());
         //entity.setUser(user);
     }
-
-    /*public void updatePartialProject(Long id, Map<String, Object> fields) {
-        Project project = projectRepository.getReferenceById(id);
-        fields.forEach((propertyName, propertyValue) ->{
-            if(propertyName.equals("imageUrl")){
-                project.setImageUrl((String) propertyValue);
-            }
-        });
-        projectRepository.save(project);
-    }*/
-
 }
