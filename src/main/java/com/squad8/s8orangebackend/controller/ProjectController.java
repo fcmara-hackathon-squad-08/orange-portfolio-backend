@@ -3,37 +3,36 @@ package com.squad8.s8orangebackend.controller;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.enums.EnumTag;
+import com.squad8.s8orangebackend.service.ConvertStringJsonToObject;
 import com.squad8.s8orangebackend.service.ProjectService;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ConvertStringJsonToObject convertStringJsonToObject;
 
     @Transactional
-    @PostMapping("/add")
-    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestBody @Valid ProjectDto projectDto, UriComponentsBuilder uriComponentsBuilder){
-        Project project = projectService.fromDto(projectDto);
-        project = projectService.insertProject(project, tags);
+    @PostMapping(value = "/add", consumes = "multipart/form-data")
+    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestParam(value = "file", required = false)MultipartFile file,
+                                                 @RequestPart("projectDto") String projectDto, UriComponentsBuilder uriComponentsBuilder)
+            throws IOException {
+        Project project = projectService.fromDto(convertStringJsonToObject.deserialize(projectDto, ProjectDto.class));
+        project = projectService.insertProject(project, tags, file);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(project.getId()).toUri();
         return ResponseEntity.created(uri).body(project);
-    }
-
-    @GetMapping("/list")
-    public ResponseEntity<List<Project>> listProject() {
-        List<Project> projects = projectService.listProjects();
-        return ResponseEntity.ok().body(projects);
     }
 
     @GetMapping("/list/tags")

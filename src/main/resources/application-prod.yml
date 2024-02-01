@@ -15,3 +15,7 @@ api:
   security:
     token:
       secret: ${TOKEN_SECRET}
+
+accessKey: ${ACCESS_KEY}
+secretAccessKey: ${SECRET_KEY}
+bucketName: ${BUCKET_NAME}

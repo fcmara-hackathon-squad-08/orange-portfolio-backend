@@ -1,4 +1,5 @@
 package com.squad8.s8orangebackend.service;
+
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.domain.tag.Tag;
 import com.squad8.s8orangebackend.domain.user.User;
@@ -11,11 +12,13 @@ import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import com.squad8.s8orangebackend.service.exceptions.UnauthorizedAccessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +31,9 @@ public class ProjectService {
     private TagRepository tagRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private S3Services s3Services;
 
-    public List<Project> listProjects() {
-        return projectRepository.findAll();
-    }
 
     public List<Project> listProjectByTag(List<EnumTag> tags) {
         List<Project> projects = new ArrayList<>();
@@ -64,18 +66,23 @@ public class ProjectService {
         return projects;
     }
 
-    public Project insertProject(Project project, List<EnumTag> tags) {
+    public Project insertProject(Project project, List<EnumTag> tags, MultipartFile multipartFile) {
         List<Tag> projectTags = tags.stream()
                 .map(tag -> {
                     String tagName = tag.name().toUpperCase();
                     return tagRepository.findTagByTag(tagName);
                 })
                 .toList();
-
         project.getTags().addAll(projectTags);
+
+        if (!multipartFile.isEmpty()) {
+            String img = s3Services.saveFile(userService.getCurrentUser().getId(), multipartFile);
+            project.setImageUrl(img);
+        }
 
         return projectRepository.save(project);
     }
+
     public Project fromDto(ProjectDto projectDto) {
         Project project = new Project();
         project.setTitle(projectDto.getTitle());
