@@ -1,30 +1,42 @@
 package com.squad8.s8orangebackend.domain.project;
+
+import com.squad8.s8orangebackend.domain.tag.Tag;
 import com.squad8.s8orangebackend.domain.user.User;
-import com.squad8.s8orangebackend.enums.EnumTag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_project")
 public class Project  implements Serializable {
+
     @Serial
     private static final Long serialVersionUID = 1l;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String title;
-    @NotNull
-    private EnumTag tag;
     @NotNull
     private String link;
     @NotEmpty
     private String description;
     private String imageUrl;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @ManyToMany
+    @JoinTable(name = "tb_project_tag", joinColumns = @JoinColumn(name = "project_id"),
+    inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,14 +45,15 @@ public class Project  implements Serializable {
     public Project() {
     }
 
-    public Project(Long id, String title, EnumTag tag, String link, String description, String imageUrl, User user) {
+    public Project(Long id, String title, String link, String description, String imageUrl, User user) {
         this.id = id;
         this.title = title;
-        this.tag = tag;
         this.link = link;
         this.description = description;
         this.imageUrl = imageUrl;
         this.user = user;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -57,14 +70,6 @@ public class Project  implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public EnumTag getTag() {
-        return tag;
-    }
-
-    public void setTag(EnumTag tag) {
-        this.tag = tag;
     }
 
     public String getLink() {
@@ -97,6 +102,26 @@ public class Project  implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

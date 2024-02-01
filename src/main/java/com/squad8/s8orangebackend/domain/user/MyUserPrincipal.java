@@ -10,17 +10,10 @@ import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 
-public class MyUserPrincipal implements UserDetails {
+public record MyUserPrincipal(User user) implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1l;
-
-    @Autowired
-    private User user;
-
-    public MyUserPrincipal(User user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
