@@ -54,8 +54,9 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody ProjectDto projectDto){
-        Project project = projectService.updateProjectBasicInformation(id, projectDto);
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody @Valid ProjectDto projectDto, @RequestParam List<EnumTag> tags ){
+        Project project = projectService.updateFromDto(id, projectDto);
+        project = projectService.updateProject(project, tags);
         return ResponseEntity.ok().body(project);
     }
 
