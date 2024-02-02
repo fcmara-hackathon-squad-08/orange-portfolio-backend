@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Service
-public class S3Services {
+public class S3Service {
 
     @Value("${bucketName}")
-    private String nomeDobucket;
+    private String bucketName;
     private static final String URL = "https://s3.amazonaws.com/";
     @Autowired
     private AmazonS3 amazonS3;
@@ -24,13 +24,17 @@ public class S3Services {
         String originalFileName =  id + file.getOriginalFilename();
         try {
             File convertMultipartInFile = convertMultipartInFile(file);
-            amazonS3.putObject(nomeDobucket, originalFileName, convertMultipartInFile);
-            String urlFile = URL + nomeDobucket + "/" + originalFileName;
+            amazonS3.putObject(bucketName, originalFileName, convertMultipartInFile);
+            String urlFile = URL + bucketName + "/" + originalFileName;
             return urlFile;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void deleteFile(String file) {
+        amazonS3.deleteObject(bucketName, file);
     }
 
     private File convertMultipartInFile(MultipartFile file) throws IOException {
@@ -41,4 +45,9 @@ public class S3Services {
 
         return convertFile;
     }
+
+    public String getBucketName() {
+        return bucketName;
+    }
+
 }

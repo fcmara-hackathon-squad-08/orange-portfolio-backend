@@ -1,4 +1,4 @@
-package com.squad8.s8orangebackend.service;
+package com.squad8.s8orangebackend.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
