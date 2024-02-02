@@ -26,6 +26,7 @@ public class S3Service {
             File convertMultipartInFile = convertMultipartInFile(file);
             amazonS3.putObject(bucketName, originalFileName, convertMultipartInFile);
             String urlFile = URL + bucketName + "/" + originalFileName;
+            convertMultipartInFile.delete();
             return urlFile;
         } catch (IOException e) {
             throw new RuntimeException(e);
