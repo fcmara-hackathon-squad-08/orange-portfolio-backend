@@ -99,7 +99,6 @@ public class Project  implements Serializable {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -123,6 +122,7 @@ public class Project  implements Serializable {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 
     @Override
     public boolean equals(Object o) {

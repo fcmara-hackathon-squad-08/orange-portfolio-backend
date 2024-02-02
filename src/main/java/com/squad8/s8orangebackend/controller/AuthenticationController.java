@@ -4,6 +4,11 @@ import com.squad8.s8orangebackend.domain.user.MyUserPrincipal;
 import com.squad8.s8orangebackend.dtos.AuthenticationDto;
 import com.squad8.s8orangebackend.dtos.LoginResponseDto;
 import com.squad8.s8orangebackend.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +32,15 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
+    @Operation(summary = "Login")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success login"),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content) })
     @PostMapping(value = "/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid AuthenticationDto data) {
         var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(data.getLogin(),

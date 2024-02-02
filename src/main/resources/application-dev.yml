@@ -22,3 +22,7 @@ api:
   security:
     token:
       secret: 1234567
+
+accessKey: ${ACCESS_KEY}
+secretAccessKey: ${SECRET_KEY}
+bucketName: ${BUCKET_NAME}
