@@ -3,6 +3,7 @@ package com.squad8.s8orangebackend.service;
 import com.squad8.s8orangebackend.domain.user.MyUserPrincipal;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.UserRegistrationDto;
+import com.squad8.s8orangebackend.dtos.UserUpdateDto;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,10 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private S3Service s3Services;
+
+    private static final String URL = "https://s3.amazonaws.com/";
 
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -36,43 +42,37 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUserBasicInformation(User user) {
+    public User updateUserBasicInformation(User userUpdate, MultipartFile file) {
+
+        User entity = getCurrentUser();
         try {
-            User entity = getCurrentUser();
-            updateData(entity, user);
+            updateUserData(userUpdate, file, entity);
             return userRepository.save(entity);
+
         } catch (Exception e) {
-            throw new ResourceNotFoundException(user.getId());
+            throw new ResourceNotFoundException(entity.getId());
         }
     }
 
-    public void updatePartialUser(Map<String, Object> fields) {
-        User user = userRepository.getReferenceById(getCurrentUser().getId());
+    private void updateUserData(User userUpdate, MultipartFile file, User entity) {
+        entity.setCountry(userUpdate.getCountry());
+        String currentFile = URL + s3Services.getBucketName() + entity.getId() + file.getOriginalFilename();
 
-        fields.forEach((propertyName, propertyValue) -> {
-            if (propertyName.equals("country")) {
-                user.setCountry((String) propertyValue);
-            }
 
-            if (propertyName.equals("imageUrl")) {
-                user.setImageUrl((String) propertyValue);
-            }
-        });
-        userRepository.save(user);
-    }
-
-    private void updateData(User entity, User user) {
-        entity.setName(user.getName());
-        entity.setSurname(user.getSurname());
-        entity.setEmail(user.getEmail());
-        entity.setPassword(user.getPassword());
-        entity.setCountry(user.getCountry());
-        entity.setImageUrl(user.getImageUrl());
+        if (!Objects.equals(entity.getImageUrl(), currentFile) && entity.getImageUrl() != null) {
+            s3Services.deleteFile(entity.getImageUrl());
+        }
+        String img = s3Services.saveFile(entity.getId(), file);
+        entity.setImageUrl(img);
     }
 
     public User fromDto(UserRegistrationDto userRegistrationDto) {
         return new User(userRegistrationDto.getName(),
                 userRegistrationDto.getSurname(), userRegistrationDto.getEmail(),
                 userRegistrationDto.getPassword());
+    }
+
+    public User fromUpdateDto(UserUpdateDto userUpdateDto) {
+        return new User(userUpdateDto.getImageUrl(), userUpdateDto.getCountry());
     }
 }
