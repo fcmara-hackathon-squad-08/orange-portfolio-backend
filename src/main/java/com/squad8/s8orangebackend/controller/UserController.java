@@ -38,8 +38,8 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content) })
     @GetMapping("/me")
-    public ResponseEntity<User> getUser(User user) {
-        user = userService.getCurrentUser();
+    public ResponseEntity<User> getUser() {
+        User user = userService.getCurrentUser();
         return ResponseEntity.ok().body(user);
     }
 
