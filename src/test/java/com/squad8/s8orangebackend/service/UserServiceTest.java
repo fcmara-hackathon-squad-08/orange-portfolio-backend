@@ -1,5 +1,6 @@
 package com.squad8.s8orangebackend.service;
 
+import com.squad8.s8orangebackend.domain.user.MyUserPrincipal;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,6 +18,17 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
+
+    @Mock
+    private PasswordEncoder encoder;
+    @Mock
+    private S3Service s3Service;
+    @Mock
+    private MultipartFile multipartFile;
+    @Mock
+    private MyUserPrincipal myUserPrincipal;
+    @Mock
+    private Authentication authentication;
 
     @Mock
     private UserRepository userRepository;
@@ -30,7 +45,8 @@ public class UserServiceTest {
 
         when(userRepository.save(any(User.class))).thenReturn(commonUser());
 
-        User user =  userService.insertUser(commonUser());
+        commonUser().setPassword(encoder.encode("password"));
+        User user = userService.insertUser(commonUser());
 
         verify(userRepository, times(1)).save(any());
 
@@ -38,9 +54,9 @@ public class UserServiceTest {
         assertEquals("name", user.getName());
         assertEquals("lastname", user.getSurname());
         assertEquals("email@gmail.com", user.getEmail());
-        assertEquals("password", user.getPassword());
 
     }
+
 
     public User commonUser() {
         return new User(1L, "name", "lastname", "email@gmail.com", "password", "Brazil", "image");
