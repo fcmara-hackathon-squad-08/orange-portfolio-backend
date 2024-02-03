@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,6 +57,24 @@ public class UserServiceTest {
         assertEquals("lastname", user.getSurname());
         assertEquals("email@gmail.com", user.getEmail());
 
+    }
+
+    @Test
+    public void shouldGetACurrentUser() {
+
+        SecurityContext securityContext = mock(SecurityContext.class);
+        SecurityContextHolder.setContext(securityContext);
+
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        when(authentication.getPrincipal()).thenReturn(myUserPrincipal);
+
+        User user = new User();
+        when(myUserPrincipal.user()).thenReturn(user);
+
+        User result = userService.getCurrentUser();
+
+        assertEquals(user, result);
     }
 
 
