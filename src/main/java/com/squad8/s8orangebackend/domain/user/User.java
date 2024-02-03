@@ -1,5 +1,6 @@
 package com.squad8.s8orangebackend.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.enums.UserRole;
 import jakarta.persistence.*;
@@ -64,6 +65,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public User(String imageUrl, String country) {
+        this.imageUrl = imageUrl;
+        this.country = country;
+    }
+
     public Long getId() {
         return id;
     }
@@ -96,6 +102,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
