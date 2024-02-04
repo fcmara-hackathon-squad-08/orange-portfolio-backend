@@ -39,18 +39,16 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
 ## Endpoints 🛠✨
 - API Documentation:
 <a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
-- Authentication:
-  
-    - *POST*```/auth/login``` -> User authentication
-      
 - Register:
   
   - *POST*```/user/register``` -> User register
- 
+- Authentication:
+  
+    - *POST*```/auth/login``` -> User authentication
+
 - User
-  - *GET*```/user/{id}``` -> Need login, get user   
-  - *PATCH*```/user/{id}``` -> Need login, update user image and country
-  - *PUT*```/user/{id}``` -> Need login, update user
+  - *GET*```/user/me``` -> Need login, get user   
+  - *PUT*```/user/me``` -> Need login, update user
     
 - Projects:
   - *POST*```/project/add``` -> Need login, add a project
