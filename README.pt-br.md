@@ -7,9 +7,9 @@
 
 </p>
 
-## Technologies 🚀
+## Tecnologias 🚀
 
-### This project was developed with the following technologies
+### Este projeto foi desenvolvido com as seguintes tecnologias:
 
 - Java
 - Spring Boot
@@ -19,7 +19,7 @@
 - Render (Deploy)
 - AWS (S3)
 
-## Table of Contents 🛰
+## Índice 🛰
 
 - [About 📖](#about-)
 - [Endpoints 🛠✨](#endpoints-)
