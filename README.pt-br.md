@@ -7,9 +7,9 @@
 
 </p>
 
-## Technologies 🚀
+## Tecnologias 🚀
 
-### This project was developed with the following technologies
+### Este projeto foi desenvolvido com as seguintes tecnologias:
 
 - Java
 - Spring Boot
@@ -19,48 +19,49 @@
 - Render (Deploy)
 - AWS (S3)
 
-## Table of Contents 🛰
+## Índice 🛰
 
-- [About 📖](#about-)
-- [Endpoints 🛠✨](#endpoints-)
-- [Team 👨‍💻](#team-)
-- [Contact 💼](#contact-)
+- [Sobre 📖](#sobre-)
+- [Pontos 🛠✨](#pontos-)
+- [Time 👨‍💻](#time-)
+- [Contatos 💼](#contatos-)
 
-## About 📖
+## Sobre 📖
 
-### Description
+### Descrição
 
-The Orange Portfolio is a web app that allows users to share their projects online and see other people's projects as well.
+O Orange Portfolio é um aplicativo web que permite aos usuários compartilhar seus projetos online e também ver os projetos de outras pessoas.
 
-### Objective
+### Objetivo
 
-This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
+Este projeto foi desenvolvido como um desafio no hackathon do processo de recrutamento da FCAMARA, que ocorreu entre 22/01/2024 e 05/02/2024.
 
-## Endpoints 🛠✨
-- API Documentation:
+## Pontos 🛠✨
+- Documentação da API:
 <a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
-- Register:
+- Registro:
   
-  - *POST*```/user/register``` -> User register
-- Authentication:
+  - *POST*```/user/register``` -> Registro de usuário
+- Autenticação:
   
-    - *POST*```/auth/login``` -> User authentication
-
+    - *POST*```/auth/login``` -> Autenticação do usuário
 > [!WARNING]
-> All operations in the points below are necessary for the user to be logged in
+> Todas as operações dos pontos abaixo é necessário o usuário estar logado
 
-- User
-  - *GET*```/user/me``` -> get user   
-  - *PUT*```/user/me``` -> update user
+
+
+- Usuário
+  - *GET*```/user/me``` -> obter o usuário  
+  - *PUT*```/user/me``` -> atualizar informações do usuário
     
-- Projects:
-  - *POST*```/project/add``` -> add a project
-  - *GET*```/project/list/tags``` -> get all projects by tag or all projects without specific tag
-  - *GET*```/project/list/tags/user``` -> get all projects by tag or all projects without specific tag of current user
-  - *PUT*```/project/{id}``` -> update project by id
-  - *DELETE*```/project/{id}``` -> delete a project by id
+- Projetos:
+  - *POST*```/project/add``` -> adicionar projeto.
+  - *GET*```/project/list/tags``` -> obter todos os projetos por tag ou todos os projetos sem tag específica
+  - *GET*```/project/list/tags/user``` -> obter todos os projetos por tag ou todos os projetos sem tag específica do usuário atual
+  - *PUT*```/project/{id}``` -> atualizar projeto por código de identificação
+  - *DELETE*```/project/{id}``` -> excluir um projeto por código de identificação
 
-## Team 👨‍💻
+## Time 👨‍💻
 
 | <a href="https://github.com/stelianok" target="_blank">**Kauã Steliano**</a> | <a href="https://github.com/stelianok" target="_blank">**Thiago Oliveira**</a>
 | :---: |:---:|
@@ -72,9 +73,9 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
 
 ---
 
-## Contact 💼
+## Contatos 💼
 
-### collaborator 1
+### colaborador 1
 
 LinkedIn: [Kauã Alexandro Steliano](https://www.linkedin.com/in/kauã-steliano-107620181/)
 
@@ -82,7 +83,7 @@ E-mail: stelianok@gmail.com
 
 Github: [Stelianok](https://github.com/stelianok)
 
-### collaborator 2
+### colaborador 2
 
 LinkedIn: [Thiago Oliveira](https://www.linkedin.com/in/thiago-oliveira-tmo/)
 
@@ -90,7 +91,7 @@ E-mail: thimachal@gmail.com
 
 Github: [Thiago Oliveira](https://github.com/Thimachal)
 
-### collaborator 3
+### colaborador 3
 
 LinkedIn: [Ericklis Cruz](https://www.linkedin.com/in/ericklis-cruz/)
 
@@ -98,7 +99,7 @@ E-mail: erickliscruz@gmail.com
 
 Github: [Ericklis Cruz](erickliscruz@gmail.com)
 
-### collaborator 4
+### colaborador 4
 
 LinkedIn: [Alan Vargas Silva](https://www.linkedin.com/in/alan-vargas-37b09b297/)
 
