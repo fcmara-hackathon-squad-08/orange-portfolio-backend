@@ -88,7 +88,6 @@ public class ProjectService {
         project.setTitle(projectDto.getTitle());
         project.setLink(projectDto.getLink());
         project.setDescription(projectDto.getDescription());
-        project.setImageUrl(projectDto.getImageUrl());
         project.setUser(userService.getCurrentUser());
         project.setCreatedAt(LocalDateTime.now());
         project.setUpdatedAt(LocalDateTime.now());

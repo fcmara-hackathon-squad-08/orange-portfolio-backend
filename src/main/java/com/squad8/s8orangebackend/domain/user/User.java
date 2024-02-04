@@ -65,8 +65,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String imageUrl, String country) {
-        this.imageUrl = imageUrl;
+    public User(String country) {
         this.country = country;
     }
 
