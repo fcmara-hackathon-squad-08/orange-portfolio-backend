@@ -47,15 +47,15 @@ Este projeto foi desenvolvido como um desafio no hackathon do processo de recrut
     - *POST*```/auth/login``` -> Autenticação do usuário
 
 - Usuário
-  - *GET*```/user/me``` -> Necessário o usuário estar logado, get user   
-  - *PUT*```/user/me``` -> Necessário o usuário estar logado, update user
+  - *GET*```/user/me``` -> Necessário o usuário estar logado - obter o usuário  
+  - *PUT*```/user/me``` -> Necessário o usuário estar logado - atualizar informações do usuário
     
 - Projetos:
-  - *POST*```/project/add``` ->Necessário o usuário estar logado, add a project
-  - *GET*```/project/list/tags``` -> Necessário o usuário estar logado, get all projects by tag or all projects without specific tag
-  - *GET*```/project/list/tags/user``` -> Necessário o usuário estar logado, get all projects by tag or all projects without specific tag of current user
-  - *PUT*```/project/{id}``` -> Necessário o usuário estar logado, update project by id
-  - *DELETE*```/project/{id}``` -> Necessário o usuário estar logado, delete a project by id
+  - *POST*```/project/add``` ->Necessário o usuário estar logado - adicionar projeto.
+  - *GET*```/project/list/tags``` -> Necessário o usuário estar logado - obter todos os projetos por tag ou todos os projetos sem tag específica
+  - *GET*```/project/list/tags/user``` -> Necessário o usuário estar logado, obter todos os projetos por tag ou todos os projetos sem tag específica do usuário atual
+  - *PUT*```/project/{id}``` -> Necessário o usuário estar logado, atualizar projeto por código de identificação
+  - *DELETE*```/project/{id}``` -> Necessário o usuário estar logado, excluir um projeto por código de identificação
 
 ## Time 👨‍💻
 
@@ -71,7 +71,7 @@ Este projeto foi desenvolvido como um desafio no hackathon do processo de recrut
 
 ## Contatos 💼
 
-### collaborator 1
+### colaborador 1
 
 LinkedIn: [Kauã Alexandro Steliano](https://www.linkedin.com/in/kauã-steliano-107620181/)
 
@@ -79,7 +79,7 @@ E-mail: stelianok@gmail.com
 
 Github: [Stelianok](https://github.com/stelianok)
 
-### collaborator 2
+### colaborador 2
 
 LinkedIn: [Thiago Oliveira](https://www.linkedin.com/in/thiago-oliveira-tmo/)
 
@@ -87,7 +87,7 @@ E-mail: thimachal@gmail.com
 
 Github: [Thiago Oliveira](https://github.com/Thimachal)
 
-### collaborator 3
+### colaborador 3
 
 LinkedIn: [Ericklis Cruz](https://www.linkedin.com/in/ericklis-cruz/)
 
@@ -95,7 +95,7 @@ E-mail: erickliscruz@gmail.com
 
 Github: [Ericklis Cruz](erickliscruz@gmail.com)
 
-### collaborator 4
+### colaborador 4
 
 LinkedIn: [Alan Vargas Silva](https://www.linkedin.com/in/alan-vargas-37b09b297/)
 
