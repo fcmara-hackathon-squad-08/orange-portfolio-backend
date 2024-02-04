@@ -46,16 +46,19 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
   
     - *POST*```/auth/login``` -> User authentication
 
+> [!WARNING]
+> All operations in the points below are necessary for the user to be logged in
+
 - User
-  - *GET*```/user/me``` -> Need user login, get user   
-  - *PUT*```/user/me``` -> Need user login, update user
+  - *GET*```/user/me``` -> get user   
+  - *PUT*```/user/me``` -> update user
     
 - Projects:
-  - *POST*```/project/add``` -> Need user login, add a project
-  - *GET*```/project/list/tags``` -> Need user login, get all projects by tag or all projects without specific tag
-  - *GET*```/project/list/tags/user``` -> Need user login, get all projects by tag or all projects without specific tag of current user
-  - *PUT*```/project/{id}``` -> Need user login, update project by id
-  - *DELETE*```/project/{id}``` -> Need user login, delete a project by id
+  - *POST*```/project/add``` -> add a project
+  - *GET*```/project/list/tags``` -> get all projects by tag or all projects without specific tag
+  - *GET*```/project/list/tags/user``` -> get all projects by tag or all projects without specific tag of current user
+  - *PUT*```/project/{id}``` -> update project by id
+  - *DELETE*```/project/{id}``` -> delete a project by id
 
 ## Team 👨‍💻
 
