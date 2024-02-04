@@ -30,32 +30,32 @@
 
 ### Descrição
 
-The Orange Portfolio is a web app that allows users to share their projects online and see other people's projects as well.
+O Orange Portfolio é um aplicativo web que permite aos usuários compartilhar seus projetos online e também ver os projetos de outras pessoas.
 
 ### Objetivo
 
-This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
+Este projeto foi desenvolvido como um desafio no hackathon do processo de recrutamento da FCAMARA, que ocorreu entre 22/01/2024 e 05/02/2024.
 
 ## Pontos 🛠✨
-- API Documentation:
+- Documentação da API:
 <a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
-- Register:
+- Registro:
   
-  - *POST*```/user/register``` -> User register
-- Authentication:
+  - *POST*```/user/register``` -> Registro de usuário
+- Autenticação:
   
-    - *POST*```/auth/login``` -> User authentication
+    - *POST*```/auth/login``` -> Autenticação do usuário
 
-- User
-  - *GET*```/user/me``` -> Need user login, get user   
-  - *PUT*```/user/me``` -> Need user login, update user
+- Usuário
+  - *GET*```/user/me``` -> Necessário o usuário estar logado, get user   
+  - *PUT*```/user/me``` -> Necessário o usuário estar logado, update user
     
-- Projects:
-  - *POST*```/project/add``` -> Need user login, add a project
-  - *GET*```/project/list/tags``` -> Need user login, get all projects by tag or all projects without specific tag
-  - *GET*```/project/list/tags/user``` -> Need user login, get all projects by tag or all projects without specific tag of current user
-  - *PUT*```/project/{id}``` -> Need user login, update project by id
-  - *DELETE*```/project/{id}``` -> Need user login, delete a project by id
+- Projetos:
+  - *POST*```/project/add``` ->Necessário o usuário estar logado, add a project
+  - *GET*```/project/list/tags``` -> Necessário o usuário estar logado, get all projects by tag or all projects without specific tag
+  - *GET*```/project/list/tags/user``` -> Necessário o usuário estar logado, get all projects by tag or all projects without specific tag of current user
+  - *PUT*```/project/{id}``` -> Necessário o usuário estar logado, update project by id
+  - *DELETE*```/project/{id}``` -> Necessário o usuário estar logado, delete a project by id
 
 ## Time 👨‍💻
 
