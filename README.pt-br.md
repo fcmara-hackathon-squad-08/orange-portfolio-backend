@@ -22,7 +22,7 @@
 ## Índice 🛰
 
 - [Sobre 📖](#sobre-)
-- [Pontos de Extremidades 🛠✨](#pontosdeextremidades-)
+- [Pontos 🛠✨](#pontos-)
 - [Time 👨‍💻](#time-)
 - [Contatos 💼](#contatos-)
 
@@ -36,7 +36,7 @@ The Orange Portfolio is a web app that allows users to share their projects onli
 
 This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
 
-## Pontos de Extremidades 🛠✨
+## Pontos 🛠✨
 - API Documentation:
 <a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
 - Register:
