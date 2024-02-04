@@ -21,22 +21,22 @@
 
 ## Índice 🛰
 
-- [About 📖](#about-)
-- [Endpoints 🛠✨](#endpoints-)
-- [Team 👨‍💻](#team-)
-- [Contact 💼](#contact-)
+- [Sobre 📖](#sobre-)
+- [Pontos de extremidades 🛠✨](#pontosdeextremidades-)
+- [Time 👨‍💻](#time-)
+- [Contatos 💼](#contatos-)
 
-## About 📖
+## Sobre 📖
 
-### Description
+### Descrição
 
 The Orange Portfolio is a web app that allows users to share their projects online and see other people's projects as well.
 
-### Objective
+### Objetivo
 
 This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
 
-## Endpoints 🛠✨
+## Pontos de extremidades 🛠✨
 - API Documentation:
 <a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
 - Register:
@@ -57,7 +57,7 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
   - *PUT*```/project/{id}``` -> Need user login, update project by id
   - *DELETE*```/project/{id}``` -> Need user login, delete a project by id
 
-## Team 👨‍💻
+## Time 👨‍💻
 
 | <a href="https://github.com/stelianok" target="_blank">**Kauã Steliano**</a> | <a href="https://github.com/stelianok" target="_blank">**Thiago Oliveira**</a>
 | :---: |:---:|
@@ -69,7 +69,7 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
 
 ---
 
-## Contact 💼
+## Contatos 💼
 
 ### collaborator 1
 
