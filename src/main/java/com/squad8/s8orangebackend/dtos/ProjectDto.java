@@ -13,7 +13,7 @@ public class ProjectDto {
     private String link;
     @NotEmpty
     private String description;
-    private String imageUrl;
+
     public ProjectDto() {
     }
 
@@ -21,7 +21,6 @@ public class ProjectDto {
         this.title = project.getTitle();
         this.link = project.getLink();
         this.description = project.getDescription();
-        this.imageUrl = project.getImageUrl();
         User user = project.getUser();
     }
 
@@ -47,14 +46,6 @@ public class ProjectDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
 }

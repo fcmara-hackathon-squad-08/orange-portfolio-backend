@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,13 +39,14 @@ public class ProjectService {
     private static final String URL = "https://s3.amazonaws.com/";
 
 
-    public List<Project> listProjectByTag(List<EnumTag> tags) {
+    public List<Project> listProjectByTag(List<String> tags) {
         List<Project> projects = new ArrayList<>();
+
 
         boolean isNull = tags == null;
         if (!isNull) {
-            for (EnumTag tag : tags) {
-                projects.addAll(projectRepository.findProjectByTag(tag.name().toUpperCase()));
+            for (String tag : tags) {
+                projects.addAll(projectRepository.findProjectByTag(tag));
             }
         } else {
             projects = projectRepository.findAllDistinctProject();
@@ -53,14 +55,14 @@ public class ProjectService {
         return projects;
     }
 
-    public List<Project> listAllUserProjectWithTagOrWithoutTag(List<EnumTag> tags) {
+    public List<Project> listAllUserProjectWithTagOrWithoutTag(List<String> tags) {
         List<Project> projects = new ArrayList<>();
 
         User user = userService.getCurrentUser();
         boolean isNull = tags == null;
         if (!isNull) {
-            for (EnumTag tag : tags) {
-                projects.addAll(projectRepository.findAllDistinctProjectByUserAndTag(tag.name().toUpperCase(), user.getId()));
+            for (String tag : tags) {
+                projects.addAll(projectRepository.findAllDistinctProjectByUserAndTag(tag, user.getId()));
             }
         } else {
             projects = projectRepository.findAllDistinctProjectByUser(user.getId());
@@ -69,7 +71,7 @@ public class ProjectService {
         return projects;
     }
 
-    public Project insertProject(Project project, List<EnumTag> tags, MultipartFile multipartFile) {
+    public Project insertProject(Project project, List<String> tags, MultipartFile multipartFile) {
 
         List<Tag> projectTags = getTags(tags);
 
@@ -88,7 +90,6 @@ public class ProjectService {
         project.setTitle(projectDto.getTitle());
         project.setLink(projectDto.getLink());
         project.setDescription(projectDto.getDescription());
-        project.setImageUrl(projectDto.getImageUrl());
         project.setUser(userService.getCurrentUser());
         project.setCreatedAt(LocalDateTime.now());
         project.setUpdatedAt(LocalDateTime.now());
@@ -103,7 +104,7 @@ public class ProjectService {
             throw new UnauthorizedAccessException("User is not the owner of the project" + id);
         }
     }
-    public Project updateProjectBasicInformation(Long id, ProjectDto projectDto, MultipartFile file, List<EnumTag> tags) {
+    public Project updateProjectBasicInformation(Long id, ProjectDto projectDto, MultipartFile file, List<String> tags) {
 
         try {
             User user = userService.getCurrentUser();
@@ -114,7 +115,7 @@ public class ProjectService {
         }
     }
 
-    private Project updateData(ProjectDto projectDto, MultipartFile file, User user, Project entity, List<EnumTag> tags) {
+    private Project updateData(ProjectDto projectDto, MultipartFile file, User user, Project entity, List<String> tags) {
 
         if ( user.equals(entity.getUser())) {
             entity.setTitle(projectDto.getTitle());
@@ -124,7 +125,7 @@ public class ProjectService {
             List<Tag> desiredTags = getTags(tags);
 
             List<Tag> updatedTags = desiredTags.stream()
-                    .map(desiredTag -> tagRepository.findTagByTag(desiredTag.getTag().toUpperCase()))
+                    .map(desiredTag -> tagRepository.findByTag(desiredTag.getTag()))
                     .filter(Objects::nonNull)
                     .toList();
 
@@ -144,11 +145,22 @@ public class ProjectService {
         return projectRepository.save(entity);
     }
 
-    private List<Tag> getTags(List<EnumTag> tags) {
-        List<Tag> projectTags = tags.stream()
-                .map(tag -> tagRepository.findTagByTag(tag.name().toUpperCase()))
-                .filter(Objects::nonNull)
-                .toList();
+    private List<Tag> getTags(List<String> tags) {
+        List<Tag> projectTags = new ArrayList<>();
+
+        for (String tag : tags) {
+            Tag existingTag = tagRepository.findTagByTag(tag);
+            if (existingTag != null) {
+                projectTags.add(existingTag);
+            } else {
+                Tag newTag = new Tag(tag.toUpperCase());
+                if (newTag.getId() == null) {
+                    tagRepository.save(newTag);
+                    projectTags.add(newTag);
+                }
+            }
+        }
+
         return projectTags;
     }
 

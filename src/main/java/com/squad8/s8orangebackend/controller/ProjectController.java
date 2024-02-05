@@ -3,8 +3,8 @@ package com.squad8.s8orangebackend.controller;
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
 import com.squad8.s8orangebackend.enums.EnumTag;
-import com.squad8.s8orangebackend.util.ConvertStringJsonToObject;
 import com.squad8.s8orangebackend.service.ProjectService;
+import com.squad8.s8orangebackend.util.ConvertStringJsonToObject;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,8 +40,8 @@ public class ProjectController {
                     content = @Content)})
     @Transactional
     @PostMapping(value = "/add", consumes = "multipart/form-data")
-    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestParam(value = "file", required = false)MultipartFile file,
-                                                 @RequestPart("projectDto") String projectDto, UriComponentsBuilder uriComponentsBuilder)
+    public ResponseEntity<Project> insertProject(@RequestParam List<String> tags, @RequestParam(value = "file", required = false)MultipartFile file,
+                                                @Schema(example = "{\"title\":\"string\", \"link\":\"string\", \"description\":\"string\"}") @RequestPart("projectDto") String projectDto, UriComponentsBuilder uriComponentsBuilder)
             throws IOException {
         Project project = projectService.fromDto(convertStringJsonToObject.deserialize(projectDto, ProjectDto.class));
         project = projectService.insertProject(project, tags, file);
@@ -59,7 +59,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Project not found",
                     content = @Content) })
     @GetMapping("/list/tags")
-    public ResponseEntity<List<Project>> listProject(@RequestParam(required = false) List<EnumTag> tags) {
+    public ResponseEntity<List<Project>> listProject(@RequestParam(required = false) List<String> tags) {
         List<Project> projects = projectService.listProjectByTag(tags);
         return ResponseEntity.ok().body(projects);
     }
@@ -76,7 +76,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Project not found",
                     content = @Content) })
     @GetMapping("/list/tags/user")
-    public ResponseEntity<List<Project>> listProjectByCurrentUser(@RequestParam(required = false) List<EnumTag> tags) {
+    public ResponseEntity<List<Project>> listProjectByCurrentUser(@RequestParam(required = false) List<String> tags) {
         List<Project> projects = projectService.listAllUserProjectWithTagOrWithoutTag(tags);
         return ResponseEntity.ok().body(projects);
     }
@@ -110,7 +110,8 @@ public class ProjectController {
                     content = @Content) })
     @Transactional
     @PutMapping(value = "/{id}", consumes = "multipart/form-data")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestParam() List<EnumTag> tags, @RequestParam(value = "file", required = false) MultipartFile file,
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestParam() List<String> tags, @RequestParam(value = "file", required = false) MultipartFile file,
+                                                 @Schema(example = "{\"title\":\"string\", \"link\":\"string\", \"description\":\"string\"}")
                                                  @RequestPart("projectDto") String projectDto) throws IOException {
         ProjectDto projectConverted = convertStringJsonToObject.deserialize(projectDto, ProjectDto.class);
         Project project = projectService.updateProjectBasicInformation(id, projectConverted, file, tags);

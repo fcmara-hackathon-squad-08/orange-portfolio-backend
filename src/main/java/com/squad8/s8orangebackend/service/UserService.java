@@ -73,6 +73,6 @@ public class UserService {
     }
 
     public User fromUpdateDto(UserUpdateDto userUpdateDto) {
-        return new User(userUpdateDto.getImageUrl(), userUpdateDto.getCountry());
+        return new User(userUpdateDto.getCountry());
     }
 }
