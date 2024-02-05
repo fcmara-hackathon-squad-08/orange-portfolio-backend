@@ -43,10 +43,10 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @Operation(summary = "Update current user")
+    @Operation(summary = "Update current user image")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Updated user",
-                    content = { @Content(mediaType = "application/json",
+                    content = { @Content(mediaType = "multipart/form-data",
                             schema = @Schema(implementation = UserUpdateDto.class)) }),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = @Content),

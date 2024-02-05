@@ -5,6 +5,7 @@ import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.UserRegistrationDto;
 import com.squad8.s8orangebackend.dtos.UserUpdateDto;
 import com.squad8.s8orangebackend.repository.UserRepository;
+import com.squad8.s8orangebackend.service.exceptions.InvalidPropertyValueException;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,16 +49,14 @@ public class UserService {
         try {
             updateUserData(userUpdate, file, entity);
             return userRepository.save(entity);
-
         } catch (Exception e) {
-            throw new ResourceNotFoundException(entity.getId());
+            throw new InvalidPropertyValueException(e.getMessage());
         }
     }
 
     private void updateUserData(User userUpdate, MultipartFile file, User entity) {
         entity.setCountry(userUpdate.getCountry());
         String currentFile = URL + s3Services.getBucketName() + entity.getId() + file.getOriginalFilename();
-
 
         if (!Objects.equals(entity.getImageUrl(), currentFile) && entity.getImageUrl() != null) {
             s3Services.deleteFile(entity.getImageUrl());

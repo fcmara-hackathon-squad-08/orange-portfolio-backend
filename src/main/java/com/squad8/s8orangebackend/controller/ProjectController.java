@@ -2,7 +2,6 @@ package com.squad8.s8orangebackend.controller;
 
 import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
-import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.service.ProjectService;
 import com.squad8.s8orangebackend.util.ConvertStringJsonToObject;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +39,7 @@ public class ProjectController {
                     content = @Content)})
     @Transactional
     @PostMapping(value = "/add", consumes = "multipart/form-data")
-    public ResponseEntity<Project> insertProject(@RequestParam List<String> tags, @RequestParam(value = "file", required = false)MultipartFile file,
+    public ResponseEntity<Project> insertProject(@RequestParam List<String> tags, @RequestParam(value = "file") MultipartFile file,
                                                 @Schema(example = "{\"title\":\"string\", \"link\":\"string\", \"description\":\"string\"}") @RequestPart("projectDto") String projectDto, UriComponentsBuilder uriComponentsBuilder)
             throws IOException {
         Project project = projectService.fromDto(convertStringJsonToObject.deserialize(projectDto, ProjectDto.class));
