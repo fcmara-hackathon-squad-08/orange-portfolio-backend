@@ -43,27 +43,31 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUserBasicInformation(User userUpdate, MultipartFile file) {
+    public User updateUserBasicInformation(MultipartFile file) {
 
         User entity = getCurrentUser();
         try {
-            updateUserData(userUpdate, file, entity);
+            updateUserData(file, entity);
             return userRepository.save(entity);
+
         } catch (Exception e) {
-            throw new InvalidPropertyValueException(e.getMessage());
+            throw new ResourceNotFoundException(entity.getId());
         }
     }
 
-    private void updateUserData(User userUpdate, MultipartFile file, User entity) {
-        entity.setCountry(userUpdate.getCountry());
+    private void updateUserData(MultipartFile file, User entity) {
         String currentFile = URL + s3Services.getBucketName() + entity.getId() + file.getOriginalFilename();
+
 
         if (!Objects.equals(entity.getImageUrl(), currentFile) && entity.getImageUrl() != null) {
             s3Services.deleteFile(entity.getImageUrl());
+            String img = s3Services.saveFile(entity.getId(), file);
+            entity.setImageUrl(img);
         }
         String img = s3Services.saveFile(entity.getId(), file);
         entity.setImageUrl(img);
     }
+
 
     public User fromDto(UserRegistrationDto userRegistrationDto) {
         return new User(userRegistrationDto.getName(),
