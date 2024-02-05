@@ -56,11 +56,10 @@ public class UserController {
                     content = @Content) })
     @Transactional
     @PutMapping(value = "/me", consumes = "multipart/form-data")
-    public ResponseEntity<User> updateUser(@Schema(example = "{\"country\":\"string\"}")@RequestPart("body") String userDto, @RequestParam(value = "file", required = false) MultipartFile file
+    public ResponseEntity<User> updateUser(@RequestParam(value = "file") MultipartFile file
                                            ) throws IOException {
-        User userUpdateDto = userService.fromUpdateDto(convertStringJsonToObject.deserialize(userDto, UserUpdateDto.class));
-        userUpdateDto = userService.updateUserBasicInformation(userUpdateDto, file);
-        return ResponseEntity.ok().body(userUpdateDto);
+        User userUpdateDto = userService.updateUserBasicInformation(file);
+        return ResponseEntity.ok().build();
     }
 
 }
