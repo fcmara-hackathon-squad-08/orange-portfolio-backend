@@ -40,7 +40,7 @@ public class ProjectController {
                     content = @Content)})
     @Transactional
     @PostMapping(value = "/add", consumes = "multipart/form-data")
-    public ResponseEntity<Project> insertProject(@RequestParam List<EnumTag> tags, @RequestParam(value = "file", required = false)MultipartFile file,
+    public ResponseEntity<Project> insertProject(@RequestParam List<String> tags, @RequestParam(value = "file", required = false)MultipartFile file,
                                                 @Schema(example = "{\"title\":\"string\", \"link\":\"string\", \"description\":\"string\"}") @RequestPart("projectDto") String projectDto, UriComponentsBuilder uriComponentsBuilder)
             throws IOException {
         Project project = projectService.fromDto(convertStringJsonToObject.deserialize(projectDto, ProjectDto.class));
@@ -59,7 +59,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Project not found",
                     content = @Content) })
     @GetMapping("/list/tags")
-    public ResponseEntity<List<Project>> listProject(@RequestParam(required = false) List<EnumTag> tags) {
+    public ResponseEntity<List<Project>> listProject(@RequestParam(required = false) List<String> tags) {
         List<Project> projects = projectService.listProjectByTag(tags);
         return ResponseEntity.ok().body(projects);
     }
@@ -76,7 +76,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "Project not found",
                     content = @Content) })
     @GetMapping("/list/tags/user")
-    public ResponseEntity<List<Project>> listProjectByCurrentUser(@RequestParam(required = false) List<EnumTag> tags) {
+    public ResponseEntity<List<Project>> listProjectByCurrentUser(@RequestParam(required = false) List<String> tags) {
         List<Project> projects = projectService.listAllUserProjectWithTagOrWithoutTag(tags);
         return ResponseEntity.ok().body(projects);
     }
@@ -110,7 +110,7 @@ public class ProjectController {
                     content = @Content) })
     @Transactional
     @PutMapping(value = "/{id}", consumes = "multipart/form-data")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestParam() List<EnumTag> tags, @RequestParam(value = "file", required = false) MultipartFile file,
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestParam() List<String> tags, @RequestParam(value = "file", required = false) MultipartFile file,
                                                  @Schema(example = "{\"title\":\"string\", \"link\":\"string\", \"description\":\"string\"}")
                                                  @RequestPart("projectDto") String projectDto) throws IOException {
         ProjectDto projectConverted = convertStringJsonToObject.deserialize(projectDto, ProjectDto.class);
