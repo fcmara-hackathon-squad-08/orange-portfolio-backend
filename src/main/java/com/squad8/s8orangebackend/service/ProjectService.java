@@ -4,10 +4,10 @@ import com.squad8.s8orangebackend.domain.project.Project;
 import com.squad8.s8orangebackend.domain.tag.Tag;
 import com.squad8.s8orangebackend.domain.user.User;
 import com.squad8.s8orangebackend.dtos.ProjectDto;
-import com.squad8.s8orangebackend.enums.EnumTag;
 import com.squad8.s8orangebackend.repository.ProjectRepository;
 import com.squad8.s8orangebackend.repository.TagRepository;
 import com.squad8.s8orangebackend.repository.UserRepository;
+import com.squad8.s8orangebackend.service.exceptions.InvalidPropertyValueException;
 import com.squad8.s8orangebackend.service.exceptions.ResourceNotFoundException;
 import com.squad8.s8orangebackend.service.exceptions.UnauthorizedAccessException;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -108,10 +106,15 @@ public class ProjectService {
 
         try {
             User user = userService.getCurrentUser();
-            Project entity = projectRepository.findById(id).get();
-            return updateData(projectDto, file, user, entity, tags);
-        } catch (Exception e) {
+
+            if (projectRepository.existsById(id)) {
+                Project entity = projectRepository.getReferenceById(id);
+                return updateData(projectDto, file, user, entity, tags);
+            }
             throw new ResourceNotFoundException(id);
+
+        } catch (Exception e) {
+            throw new InvalidPropertyValueException(e.getMessage());
         }
     }
 
