@@ -2,7 +2,7 @@
 
 <p1 align="center">
 
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)]()
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/fcmara-hackathon-squad-08/orange-portfolio-backend/blob/dev/README.pt-br)
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/fcmara-hackathon-squad-08/orange-portfolio-backend/blob/dev/README.md)
 
 </p>
