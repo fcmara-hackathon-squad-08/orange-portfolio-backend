@@ -2,8 +2,8 @@
 
 <p1 align="center">
 
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)]()
-[![en](https://img.shields.io/badge/lang-en-red.svg)]()
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/fcmara-hackathon-squad-08/orange-portfolio-backend/blob/feature/readme/README.pt-br.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/fcmara-hackathon-squad-08/orange-portfolio-backend/blob/feature/readme/README.md)
 
 </p>
 
@@ -24,7 +24,9 @@
 - [About 📖](#about-)
 - [Endpoints 🛠✨](#endpoints-)
 - [Team 👨‍💻](#team-)
+- [Run project 💼](#runproject-)
 - [Contact 💼](#contact-)
+
 
 ## About 📖
 
@@ -34,31 +36,50 @@ The Orange Portfolio is a web app that allows users to share their projects onli
 
 ### Objective
 
-This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
+This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 05/02/2024.  
 
-## Endpoints
-- 
-- API Documentation: ```https://sq8-orange-fcamra.onrender.com/swagger-ui/custom.html```
-  
-- Authentication:
-  
-    - *POST*```/auth/login``` -> User authentication
-      
+## Endpoints 🛠✨
+- API Documentation:
+<a href="https://sq8-orange-fcamra.onrender.com/swagger-ui/index.html" rel="noopener noreferrer" target="_blank"> <img align="center" src="https://github.com/Thimachal/api-front-angular/assets/63027260/6324d49d-e87c-425a-ae3a-106514a79d2f" height="80" width="90"/>
 - Register:
   
   - *POST*```/user/register``` -> User register
- 
+- Authentication:
+  
+    - *POST*```/auth/login``` -> User authentication
+
+> [!WARNING]
+> All operations in the points below are necessary for the user to be logged in
+
 - User
-  - *GET*```/user/{id}``` -> Need login, get user   
-  - *PATCH*```/user/{id}``` -> Need login, update user image and country
-  - *PUT*```/user/{id}``` -> Need login, update user
+  - *GET*```/user/me``` -> get user   
+  - *PUT*```/user/me``` -> update user
     
 - Projects:
-  - *POST*```/project/add``` -> Need login, add a project
-  - *GET*```/project/list``` -> Need login, get all projects
-  - *PUT*```/project/{id}``` -> Need login, update project
-  - *PATCH*```/project/{id}``` -> Need login, update project image
-  - *DELETE*```/project/{id}``` -> Need login, delete a project
+  - *POST*```/project/add``` -> add a project
+  - *GET*```/project/list/tags``` -> get all projects by tag or all projects without specific tag
+  - *GET*```/project/list/tags/user``` -> get all projects by tag or all projects without specific tag of current user
+  - *PUT*```/project/{id}``` -> update project by id
+  - *DELETE*```/project/{id}``` -> delete a project by id
+ 
+## Run project
+
+- Clone the project 
+
+```
+git@github.com:fcmara-hackathon-squad-08/orange-portfolio-backend.git
+```
+
+- Use your favorite IDE - Intellij, Eclipse...
+
+- Run Docker
+
+```
+docker compose up -d
+```
+- Change in application.yml from prod to dev
+
+- You need to create a AWS Bucket
 
 ## Team 👨‍💻
 
@@ -105,4 +126,3 @@ LinkedIn: [Alan Vargas Silva](https://www.linkedin.com/in/alan-vargas-37b09b297/
 E-mail: alanvargasenf@gmail.com
 
 Github: [Alan Vargas Silva](https://github.com/alanvargas04)
-
