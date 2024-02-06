@@ -24,6 +24,7 @@
 - [Sobre 📖](#sobre-)
 - [Pontos 🛠✨](#pontos-)
 - [Time 👨‍💻](#time-)
+- [Executar Projeto](#Executarprojeto-)
 - [Contatos 💼](#contatos-)
 
 ## Sobre 📖
@@ -60,6 +61,25 @@ Este projeto foi desenvolvido como um desafio no hackathon do processo de recrut
   - *GET*```/project/list/tags/user``` -> obter todos os projetos por tag ou todos os projetos sem tag específica do usuário atual
   - *PUT*```/project/{id}``` -> atualizar projeto por código de identificação
   - *DELETE*```/project/{id}``` -> excluir um projeto por código de identificação
+ 
+## Executar projeto
+
+- Clonar projeto
+
+```
+git@github.com:fcmara-hackathon-squad-08/orange-portfolio-backend.git
+```
+
+- Usar sua IDE favorita - Intellij, Eclipse...
+
+- Executar Dokcer
+
+```
+docker compose up -d
+```
+- Alter application.yml de prod para dev
+
+- É necessário a criação de um bucket na AWS para teste
 
 ## Time 👨‍💻
 
