@@ -24,7 +24,9 @@
 - [About 📖](#about-)
 - [Endpoints 🛠✨](#endpoints-)
 - [Team 👨‍💻](#team-)
+- [Run project 💼](#runproject-)
 - [Contact 💼](#contact-)
+
 
 ## About 📖
 
@@ -34,7 +36,7 @@ The Orange Portfolio is a web app that allows users to share their projects onli
 
 ### Objective
 
-This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 02/05/2024.  
+This project was developed as a challenge in the FCAMARA's recruitment process hackathon, which occurred between 01/22/2024 and 05/02/2024.  
 
 ## Endpoints 🛠✨
 - API Documentation:
@@ -59,6 +61,25 @@ This project was developed as a challenge in the FCAMARA's recruitment process h
   - *GET*```/project/list/tags/user``` -> get all projects by tag or all projects without specific tag of current user
   - *PUT*```/project/{id}``` -> update project by id
   - *DELETE*```/project/{id}``` -> delete a project by id
+ 
+## Run project
+
+- Clone the project 
+
+```
+git@github.com:fcmara-hackathon-squad-08/orange-portfolio-backend.git
+```
+
+- Use your favorite IDE - Intellij, Eclipse...
+
+- Run Docker
+
+```
+docker compose up -d
+```
+- Change in application.yml from prod to dev
+
+- You need to create a AWS Bucket
 
 ## Team 👨‍💻
 
